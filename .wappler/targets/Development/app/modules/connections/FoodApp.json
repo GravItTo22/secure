@@ -10,7 +10,11 @@
       "user": "doadmin",
       "password": "AVNS_Ll4W0-NGuSIFUQsWukt",
       "database": "defaultdb",
-      "ssl": {}
+      "charset": "utf8",
+      "ssl": {
+        "rejectUnauthorized": false
+      }
     }
-  }
+  },
+  "fileName": "FoodApp.json"
 }
