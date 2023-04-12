@@ -70,5 +70,9 @@
   "sliding-image.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "promo-code.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

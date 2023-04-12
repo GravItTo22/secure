@@ -77,6 +77,11 @@
       "layout": "main"
     },
     {
+      "path": "/promo-code",
+      "page": "promo-code",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

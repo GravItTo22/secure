@@ -164,140 +164,14 @@
                           {
                             "table": "m_restaurant",
                             "column": "created_on"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image1"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image2"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image3"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image4"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image5"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "cover_image"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "status",
-                            "alias": "sliding_img_status"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_pan"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_gstin"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_rmc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_fsc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_front"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_back"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "other_id_proof"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "bank_account"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "owner_image"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy1"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy2"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy3"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy4"
                           }
                         ],
                         "table": {
                           "name": "m_restaurant"
                         },
                         "primary": "id",
-                        "joins": [
-                          {
-                            "table": "rest_sliding_img",
-                            "column": "*",
-                            "alias": "rsi",
-                            "type": "LEFT",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "rsi",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          },
-                          {
-                            "table": "rest_kyc_doc",
-                            "column": "*",
-                            "alias": "restkycdoc",
-                            "type": "INNER",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "restkycdoc",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          }
-                        ],
-                        "query": "SELECT m_restaurant.id, m_restaurant.gen_shop_id, m_restaurant.shop_name_en, m_restaurant.shop_name_bn, m_restaurant.shop_name_hin, m_restaurant.shop_logo, m_restaurant.shop_mobile_no, m_restaurant.is_watsapp, m_restaurant.watsapp_no, m_restaurant.email_id, m_restaurant.owner_name, m_restaurant.gst_in, m_restaurant.is_rmc, m_restaurant.rmc_no, m_restaurant.is_fsc, m_restaurant.balance_amount, m_restaurant.is_sliding_img, m_restaurant.pan_no, m_restaurant.address, m_restaurant.pin, m_restaurant.kyc_status, m_restaurant.status, m_restaurant.created_by, m_restaurant.created_on, rsi.sliding_image1, rsi.sliding_image2, rsi.sliding_image3, rsi.sliding_image4, rsi.sliding_image5, rsi.cover_image, rsi.status AS sliding_img_status, restkycdoc.upload_pan, restkycdoc.upload_gstin, restkycdoc.upload_rmc, restkycdoc.upload_fsc, restkycdoc.upload_aadhar_front, restkycdoc.upload_aadhar_back, restkycdoc.other_id_proof, restkycdoc.bank_account, restkycdoc.owner_image, restkycdoc.agreement_copy1, restkycdoc.agreement_copy2, restkycdoc.agreement_copy3, restkycdoc.agreement_copy4\nFROM m_restaurant\nLEFT JOIN rest_sliding_img AS rsi ON (rsi.rest_id = m_restaurant.id) INNER JOIN rest_kyc_doc AS restkycdoc ON (restkycdoc.rest_id = m_restaurant.id)\nWHERE (m_restaurant.owner_name LIKE :P1 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_hin LIKE :P2 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_bn LIKE :P3 /* {{$_GET.search_value}} */ OR m_restaurant.shop_mobile_no LIKE :P4 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_en LIKE :P5 /* {{$_GET.search_value}} */ OR m_restaurant.watsapp_no LIKE :P6 /* {{$_GET.search_value}} */) AND m_restaurant.market_id = :P7 /* {{$_GET.market_id}} */ AND m_restaurant.cat_type_id = :P8 /* {{$_GET.cat_type_id}} */\nORDER BY m_restaurant.id DESC",
+                        "joins": [],
+                        "query": "SELECT id, gen_shop_id, shop_name_en, shop_name_bn, shop_name_hin, shop_logo, shop_mobile_no, is_watsapp, watsapp_no, email_id, owner_name, gst_in, is_rmc, rmc_no, is_fsc, balance_amount, is_sliding_img, pan_no, address, pin, kyc_status, status, created_by, created_on\nFROM m_restaurant\nWHERE (owner_name LIKE :P1 /* {{$_GET.search_value}} */ OR shop_name_hin LIKE :P2 /* {{$_GET.search_value}} */ OR shop_name_bn LIKE :P3 /* {{$_GET.search_value}} */ OR shop_mobile_no LIKE :P4 /* {{$_GET.search_value}} */ OR shop_name_en LIKE :P5 /* {{$_GET.search_value}} */ OR watsapp_no LIKE :P6 /* {{$_GET.search_value}} */) AND market_id = :P7 /* {{$_GET.market_id}} */ AND cat_type_id = :P8 /* {{$_GET.cat_type_id}} */ AND deleted_on IS NULL\nORDER BY id DESC",
                         "params": [
                           {
                             "operator": "contains",
@@ -498,12 +372,12 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "market_id",
                                   "references": "id",
                                   "inTable": "m_market",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "market_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
@@ -523,15 +397,35 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "cat_type_id",
                                   "references": "id",
                                   "inTable": "m_category_type",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "cat_type_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
+                            },
+                            {
+                              "id": "m_restaurant.deleted_on",
+                              "field": "m_restaurant.deleted_on",
+                              "type": "datetime",
+                              "operator": "is_null",
+                              "value": null,
+                              "data": {
+                                "table": "m_restaurant",
+                                "column": "deleted_on",
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "unique": false,
+                                  "nullable": true,
+                                  "name": "deleted_on"
+                                }
+                              },
+                              "operation": "IS NULL"
                             }
                           ],
                           "conditional": null,
@@ -696,86 +590,6 @@
                           {
                             "type": "datetime",
                             "name": "created_on"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image4"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image5"
-                          },
-                          {
-                            "type": "text",
-                            "name": "cover_image"
-                          },
-                          {
-                            "type": "number",
-                            "name": "sliding_img_status"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_pan"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_gstin"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_rmc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_fsc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_front"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_back"
-                          },
-                          {
-                            "type": "text",
-                            "name": "other_id_proof"
-                          },
-                          {
-                            "type": "text",
-                            "name": "bank_account"
-                          },
-                          {
-                            "type": "text",
-                            "name": "owner_image"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy4"
                           }
                         ]
                       }
@@ -888,140 +702,14 @@
                           {
                             "table": "m_restaurant",
                             "column": "created_on"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image1"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image2"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image3"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image4"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image5"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "cover_image"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "status",
-                            "alias": "sliding_img_status"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_pan"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_gstin"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_rmc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_fsc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_front"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_back"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "other_id_proof"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "bank_account"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "owner_image"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy1"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy2"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy3"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy4"
                           }
                         ],
                         "table": {
                           "name": "m_restaurant"
                         },
                         "primary": "id",
-                        "joins": [
-                          {
-                            "table": "rest_sliding_img",
-                            "column": "*",
-                            "alias": "rsi",
-                            "type": "LEFT",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "rsi",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          },
-                          {
-                            "table": "rest_kyc_doc",
-                            "column": "*",
-                            "alias": "restkycdoc",
-                            "type": "INNER",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "restkycdoc",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          }
-                        ],
-                        "query": "SELECT m_restaurant.id, m_restaurant.gen_shop_id, m_restaurant.shop_name_en, m_restaurant.shop_name_bn, m_restaurant.shop_name_hin, m_restaurant.shop_logo, m_restaurant.shop_mobile_no, m_restaurant.is_watsapp, m_restaurant.watsapp_no, m_restaurant.email_id, m_restaurant.owner_name, m_restaurant.gst_in, m_restaurant.is_rmc, m_restaurant.rmc_no, m_restaurant.is_fsc, m_restaurant.balance_amount, m_restaurant.is_sliding_img, m_restaurant.pan_no, m_restaurant.address, m_restaurant.pin, m_restaurant.kyc_status, m_restaurant.status, m_restaurant.created_by, m_restaurant.created_on, rsi.sliding_image1, rsi.sliding_image2, rsi.sliding_image3, rsi.sliding_image4, rsi.sliding_image5, rsi.cover_image, rsi.status AS sliding_img_status, restkycdoc.upload_pan, restkycdoc.upload_gstin, restkycdoc.upload_rmc, restkycdoc.upload_fsc, restkycdoc.upload_aadhar_front, restkycdoc.upload_aadhar_back, restkycdoc.other_id_proof, restkycdoc.bank_account, restkycdoc.owner_image, restkycdoc.agreement_copy1, restkycdoc.agreement_copy2, restkycdoc.agreement_copy3, restkycdoc.agreement_copy4\nFROM m_restaurant\nLEFT JOIN rest_sliding_img AS rsi ON (rsi.rest_id = m_restaurant.id) INNER JOIN rest_kyc_doc AS restkycdoc ON (restkycdoc.rest_id = m_restaurant.id)\nWHERE m_restaurant.market_id = :P1 /* {{$_GET.market_id}} */ AND m_restaurant.cat_type_id = :P2 /* {{$_GET.cat_type_id}} */\nORDER BY m_restaurant.id DESC",
+                        "joins": [],
+                        "query": "SELECT id, gen_shop_id, shop_name_en, shop_name_bn, shop_name_hin, shop_logo, shop_mobile_no, is_watsapp, watsapp_no, email_id, owner_name, gst_in, is_rmc, rmc_no, is_fsc, balance_amount, is_sliding_img, pan_no, address, pin, kyc_status, status, created_by, created_on\nFROM m_restaurant\nWHERE market_id = :P1 /* {{$_GET.market_id}} */ AND cat_type_id = :P2 /* {{$_GET.cat_type_id}} */ AND deleted_on IS NULL\nORDER BY id DESC",
                         "params": [
                           {
                             "operator": "equal",
@@ -1054,12 +742,12 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "market_id",
                                   "references": "id",
                                   "inTable": "m_market",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "market_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
@@ -1079,15 +767,35 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "cat_type_id",
                                   "references": "id",
                                   "inTable": "m_category_type",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "cat_type_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
+                            },
+                            {
+                              "id": "m_restaurant.deleted_on",
+                              "field": "m_restaurant.deleted_on",
+                              "type": "datetime",
+                              "operator": "is_null",
+                              "value": null,
+                              "data": {
+                                "table": "m_restaurant",
+                                "column": "deleted_on",
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "unique": false,
+                                  "nullable": true,
+                                  "name": "deleted_on"
+                                }
+                              },
+                              "operation": "IS NULL"
                             }
                           ],
                           "conditional": null,
@@ -1252,86 +960,6 @@
                           {
                             "type": "datetime",
                             "name": "created_on"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image4"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image5"
-                          },
-                          {
-                            "type": "text",
-                            "name": "cover_image"
-                          },
-                          {
-                            "type": "number",
-                            "name": "sliding_img_status"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_pan"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_gstin"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_rmc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_fsc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_front"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_back"
-                          },
-                          {
-                            "type": "text",
-                            "name": "other_id_proof"
-                          },
-                          {
-                            "type": "text",
-                            "name": "bank_account"
-                          },
-                          {
-                            "type": "text",
-                            "name": "owner_image"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy4"
                           }
                         ]
                       }
@@ -1455,140 +1083,14 @@
                           {
                             "table": "m_restaurant",
                             "column": "created_on"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image1"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image2"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image3"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image4"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image5"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "cover_image"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "status",
-                            "alias": "sliding_img_status"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_pan"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_gstin"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_rmc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_fsc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_front"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_back"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "other_id_proof"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "bank_account"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "owner_image"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy1"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy2"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy3"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy4"
                           }
                         ],
                         "table": {
                           "name": "m_restaurant"
                         },
                         "primary": "id",
-                        "joins": [
-                          {
-                            "table": "rest_sliding_img",
-                            "column": "*",
-                            "alias": "rsi",
-                            "type": "LEFT",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "rsi",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          },
-                          {
-                            "table": "rest_kyc_doc",
-                            "column": "*",
-                            "alias": "restkycdoc",
-                            "type": "INNER",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "restkycdoc",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          }
-                        ],
-                        "query": "SELECT m_restaurant.id, m_restaurant.gen_shop_id, m_restaurant.shop_name_en, m_restaurant.shop_name_bn, m_restaurant.shop_name_hin, m_restaurant.shop_logo, m_restaurant.shop_mobile_no, m_restaurant.is_watsapp, m_restaurant.watsapp_no, m_restaurant.email_id, m_restaurant.owner_name, m_restaurant.gst_in, m_restaurant.is_rmc, m_restaurant.rmc_no, m_restaurant.is_fsc, m_restaurant.balance_amount, m_restaurant.is_sliding_img, m_restaurant.pan_no, m_restaurant.address, m_restaurant.pin, m_restaurant.kyc_status, m_restaurant.status, m_restaurant.created_by, m_restaurant.created_on, rsi.sliding_image1, rsi.sliding_image2, rsi.sliding_image3, rsi.sliding_image4, rsi.sliding_image5, rsi.cover_image, rsi.status AS sliding_img_status, restkycdoc.upload_pan, restkycdoc.upload_gstin, restkycdoc.upload_rmc, restkycdoc.upload_fsc, restkycdoc.upload_aadhar_front, restkycdoc.upload_aadhar_back, restkycdoc.other_id_proof, restkycdoc.bank_account, restkycdoc.owner_image, restkycdoc.agreement_copy1, restkycdoc.agreement_copy2, restkycdoc.agreement_copy3, restkycdoc.agreement_copy4\nFROM m_restaurant\nLEFT JOIN rest_sliding_img AS rsi ON (rsi.rest_id = m_restaurant.id) INNER JOIN rest_kyc_doc AS restkycdoc ON (restkycdoc.rest_id = m_restaurant.id)\nWHERE (m_restaurant.owner_name LIKE :P1 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_hin LIKE :P2 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_bn LIKE :P3 /* {{$_GET.search_value}} */ OR m_restaurant.shop_mobile_no LIKE :P4 /* {{$_GET.search_value}} */ OR m_restaurant.shop_name_en LIKE :P5 /* {{$_GET.search_value}} */ OR m_restaurant.watsapp_no LIKE :P6 /* {{$_GET.search_value}} */) AND m_restaurant.market_id = :P7 /* {{$_GET.market_id}} */\nORDER BY m_restaurant.id DESC",
+                        "joins": [],
+                        "query": "SELECT id, gen_shop_id, shop_name_en, shop_name_bn, shop_name_hin, shop_logo, shop_mobile_no, is_watsapp, watsapp_no, email_id, owner_name, gst_in, is_rmc, rmc_no, is_fsc, balance_amount, is_sliding_img, pan_no, address, pin, kyc_status, status, created_by, created_on\nFROM m_restaurant\nWHERE (owner_name LIKE :P1 /* {{$_GET.search_value}} */ OR shop_name_hin LIKE :P2 /* {{$_GET.search_value}} */ OR shop_name_bn LIKE :P3 /* {{$_GET.search_value}} */ OR shop_mobile_no LIKE :P4 /* {{$_GET.search_value}} */ OR shop_name_en LIKE :P5 /* {{$_GET.search_value}} */ OR watsapp_no LIKE :P6 /* {{$_GET.search_value}} */) AND market_id = :P7 /* {{$_GET.market_id}} */ AND deleted_on IS NULL\nORDER BY id DESC",
                         "params": [
                           {
                             "operator": "contains",
@@ -1783,15 +1285,35 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "market_id",
                                   "references": "id",
                                   "inTable": "m_market",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "market_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
+                            },
+                            {
+                              "id": "m_restaurant.deleted_on",
+                              "field": "m_restaurant.deleted_on",
+                              "type": "datetime",
+                              "operator": "is_null",
+                              "value": null,
+                              "data": {
+                                "table": "m_restaurant",
+                                "column": "deleted_on",
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "unique": false,
+                                  "nullable": true,
+                                  "name": "deleted_on"
+                                }
+                              },
+                              "operation": "IS NULL"
                             }
                           ],
                           "conditional": null,
@@ -1956,86 +1478,6 @@
                           {
                             "type": "datetime",
                             "name": "created_on"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image4"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image5"
-                          },
-                          {
-                            "type": "text",
-                            "name": "cover_image"
-                          },
-                          {
-                            "type": "number",
-                            "name": "sliding_img_status"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_pan"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_gstin"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_rmc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_fsc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_front"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_back"
-                          },
-                          {
-                            "type": "text",
-                            "name": "other_id_proof"
-                          },
-                          {
-                            "type": "text",
-                            "name": "bank_account"
-                          },
-                          {
-                            "type": "text",
-                            "name": "owner_image"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy4"
                           }
                         ]
                       }
@@ -2148,140 +1590,14 @@
                           {
                             "table": "m_restaurant",
                             "column": "created_on"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image1"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image2"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image3"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image4"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "sliding_image5"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "cover_image"
-                          },
-                          {
-                            "table": "rsi",
-                            "column": "status",
-                            "alias": "sliding_img_status"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_pan"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_gstin"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_rmc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_fsc"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_front"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "upload_aadhar_back"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "other_id_proof"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "bank_account"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "owner_image"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy1"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy2"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy3"
-                          },
-                          {
-                            "table": "restkycdoc",
-                            "column": "agreement_copy4"
                           }
                         ],
                         "table": {
                           "name": "m_restaurant"
                         },
                         "primary": "id",
-                        "joins": [
-                          {
-                            "table": "rest_sliding_img",
-                            "column": "*",
-                            "alias": "rsi",
-                            "type": "LEFT",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "rsi",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          },
-                          {
-                            "table": "rest_kyc_doc",
-                            "column": "*",
-                            "alias": "restkycdoc",
-                            "type": "INNER",
-                            "clauses": {
-                              "condition": "AND",
-                              "rules": [
-                                {
-                                  "table": "restkycdoc",
-                                  "column": "rest_id",
-                                  "operator": "equal",
-                                  "value": {
-                                    "table": "m_restaurant",
-                                    "column": "id"
-                                  },
-                                  "operation": "="
-                                }
-                              ]
-                            },
-                            "primary": "id"
-                          }
-                        ],
-                        "query": "SELECT m_restaurant.id, m_restaurant.gen_shop_id, m_restaurant.shop_name_en, m_restaurant.shop_name_bn, m_restaurant.shop_name_hin, m_restaurant.shop_logo, m_restaurant.shop_mobile_no, m_restaurant.is_watsapp, m_restaurant.watsapp_no, m_restaurant.email_id, m_restaurant.owner_name, m_restaurant.gst_in, m_restaurant.is_rmc, m_restaurant.rmc_no, m_restaurant.is_fsc, m_restaurant.balance_amount, m_restaurant.is_sliding_img, m_restaurant.pan_no, m_restaurant.address, m_restaurant.pin, m_restaurant.kyc_status, m_restaurant.status, m_restaurant.created_by, m_restaurant.created_on, rsi.sliding_image1, rsi.sliding_image2, rsi.sliding_image3, rsi.sliding_image4, rsi.sliding_image5, rsi.cover_image, rsi.status AS sliding_img_status, restkycdoc.upload_pan, restkycdoc.upload_gstin, restkycdoc.upload_rmc, restkycdoc.upload_fsc, restkycdoc.upload_aadhar_front, restkycdoc.upload_aadhar_back, restkycdoc.other_id_proof, restkycdoc.bank_account, restkycdoc.owner_image, restkycdoc.agreement_copy1, restkycdoc.agreement_copy2, restkycdoc.agreement_copy3, restkycdoc.agreement_copy4\nFROM m_restaurant\nLEFT JOIN rest_sliding_img AS rsi ON (rsi.rest_id = m_restaurant.id) INNER JOIN rest_kyc_doc AS restkycdoc ON (restkycdoc.rest_id = m_restaurant.id)\nWHERE m_restaurant.market_id = :P1 /* {{$_GET.market_id}} */\nORDER BY m_restaurant.id DESC",
+                        "joins": [],
+                        "query": "SELECT id, gen_shop_id, shop_name_en, shop_name_bn, shop_name_hin, shop_logo, shop_mobile_no, is_watsapp, watsapp_no, email_id, owner_name, gst_in, is_rmc, rmc_no, is_fsc, balance_amount, is_sliding_img, pan_no, address, pin, kyc_status, status, created_by, created_on\nFROM m_restaurant\nWHERE market_id = :P1 /* {{$_GET.market_id}} */ AND deleted_on IS NULL\nORDER BY id DESC",
                         "params": [
                           {
                             "operator": "equal",
@@ -2308,15 +1624,35 @@
                                   "primary": false,
                                   "unique": false,
                                   "nullable": true,
+                                  "name": "market_id",
                                   "references": "id",
                                   "inTable": "m_market",
                                   "referenceType": "integer",
                                   "onUpdate": "NO ACTION",
-                                  "onDelete": "NO ACTION",
-                                  "name": "market_id"
+                                  "onDelete": "NO ACTION"
                                 }
                               },
                               "operation": "="
+                            },
+                            {
+                              "id": "m_restaurant.deleted_on",
+                              "field": "m_restaurant.deleted_on",
+                              "type": "datetime",
+                              "operator": "is_null",
+                              "value": null,
+                              "data": {
+                                "table": "m_restaurant",
+                                "column": "deleted_on",
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "unique": false,
+                                  "nullable": true,
+                                  "name": "deleted_on"
+                                }
+                              },
+                              "operation": "IS NULL"
                             }
                           ],
                           "conditional": null,
@@ -2481,86 +1817,6 @@
                           {
                             "type": "datetime",
                             "name": "created_on"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image4"
-                          },
-                          {
-                            "type": "text",
-                            "name": "sliding_image5"
-                          },
-                          {
-                            "type": "text",
-                            "name": "cover_image"
-                          },
-                          {
-                            "type": "number",
-                            "name": "sliding_img_status"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_pan"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_gstin"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_rmc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_fsc"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_front"
-                          },
-                          {
-                            "type": "text",
-                            "name": "upload_aadhar_back"
-                          },
-                          {
-                            "type": "text",
-                            "name": "other_id_proof"
-                          },
-                          {
-                            "type": "text",
-                            "name": "bank_account"
-                          },
-                          {
-                            "type": "text",
-                            "name": "owner_image"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy1"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy2"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy3"
-                          },
-                          {
-                            "type": "text",
-                            "name": "agreement_copy4"
                           }
                         ]
                       }

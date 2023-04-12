@@ -96,7 +96,7 @@
                                     <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                                     <td>
                                         <button title="Edit" class="pd-setting-ed" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddRestaurantList.select(id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Shipping Address" class="pd-setting-ed"><i class="fas fa-shipping-fast" aria-hidden="true"></i></button>
+                                        <button data-toggle="modal" title="Delete Restaurent" class="pd-setting-ed" data-target="#modalDelete" dmx-on:click="ddRestaurantList.select(id)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -129,7 +129,7 @@
         </div>
     </div>
 </div>
-<!-- modal start -->
+<!-- modal Add Edit start -->
 <div id="modalAddEdit" class="modal modal-adminpro-general Customwidth-popup-WarningModal fade" role="dialog" is="dmx-bs5-modal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -463,6 +463,44 @@
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">{{content.ddUserList.data.id?'Update':'Submit'}}<span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
                     <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEditRestDetails.reset(true);ddRestaurantList.select(0)">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- modal Add Edit ends -->
+<!-- modal Rest Delete start -->
+<div id="modalDelete" class="modal modal-adminpro-general Customwidth-popup-WarningModal fade" role="dialog" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-close-area modal-close-df" dmx-on:click="scformAddEditRestDetails.reset(true);ddRestaurantList.select(0)">
+                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                </div>
+                <h4 class="modal-title">Delete Restaurant</h4>
+            </div>
+            <form id="scformDelRest" is="dmx-serverconnect-form" method="post" action="/api/Restaurant/DeleteRestaurent" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scRestaurantList.load({market_id: market_select.value, cat_type_id: cattype_select.value});notifMain.success(scformDelRest.data);modalDelete.hide()" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
+                <div class="modal-body gito-py-0">
+                    <div class="row mx-0">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="review-content-section row mx-0">
+                                <input type="hidden" name="rest_id" id="EditRestaurantDelId" dmx-bind:value="content.ddRestaurantList.data.id">
+
+                                <label class="text-info col-12 col-md-4">Are you sure to delete this restaurent?</label>
+                                <div class="input-group mg-b-pro-edt col-12 col-md-6">
+                                    <span class="input-group-addon"><i class="icon nalika-info" aria-hidden="true"></i></span>
+                                    <select type="text" class="form-control" id="is_del" name="delete">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">Delete <span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
+                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformDelRest.reset(true);ddRestaurantList.select(0)">Close</button>
                 </div>
             </form>
         </div>
