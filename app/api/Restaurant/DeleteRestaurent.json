@@ -54,6 +54,12 @@
                         "column": "deleted_on",
                         "type": "datetime",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "m_restaurant",
+                        "column": "status",
+                        "type": "number",
+                        "value": "{{0}}"
                       }
                     ],
                     "table": "m_restaurant",
@@ -76,7 +82,7 @@
                       "valid": true
                     },
                     "returning": "id",
-                    "query": "UPDATE m_restaurant\nSET deleted_on = :P1 /* {{NOW}} */\nWHERE id = :P2 /* {{$_POST.rest_id}} */",
+                    "query": "UPDATE m_restaurant\nSET deleted_on = :P1 /* {{NOW}} */, status = :P2 /* {{0}} */\nWHERE id = :P3 /* {{$_POST.rest_id}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -84,9 +90,14 @@
                         "value": "{{NOW}}"
                       },
                       {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{0}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P2",
+                        "name": ":P3",
                         "value": "{{$_POST.rest_id}}"
                       }
                     ]
@@ -113,6 +124,12 @@
                         "column": "deleted_on",
                         "type": "datetime",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "rest_sliding_img",
+                        "column": "status",
+                        "type": "number",
+                        "value": "{{0}}"
                       }
                     ],
                     "table": "rest_sliding_img",
@@ -135,7 +152,7 @@
                       "valid": true
                     },
                     "returning": "id",
-                    "query": "UPDATE rest_sliding_img\nSET deleted_on = :P1 /* {{NOW}} */\nWHERE rest_id = :P2 /* {{$_POST.rest_id}} */",
+                    "query": "UPDATE rest_sliding_img\nSET deleted_on = :P1 /* {{NOW}} */, status = :P2 /* {{0}} */\nWHERE rest_id = :P3 /* {{$_POST.rest_id}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -143,9 +160,14 @@
                         "value": "{{NOW}}"
                       },
                       {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{0}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P2",
+                        "name": ":P3",
                         "value": "{{$_POST.rest_id}}"
                       }
                     ]
@@ -172,6 +194,12 @@
                         "column": "deleted_on",
                         "type": "datetime",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "rest_kyc_doc",
+                        "column": "status",
+                        "type": "number",
+                        "value": "{{0}}"
                       }
                     ],
                     "table": "rest_kyc_doc",
@@ -194,7 +222,7 @@
                       "valid": true
                     },
                     "returning": "id",
-                    "query": "UPDATE rest_kyc_doc\nSET deleted_on = :P1 /* {{NOW}} */\nWHERE rest_id = :P2 /* {{$_POST.rest_id}} */",
+                    "query": "UPDATE rest_kyc_doc\nSET deleted_on = :P1 /* {{NOW}} */, status = :P2 /* {{0}} */\nWHERE rest_id = :P3 /* {{$_POST.rest_id}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -202,9 +230,14 @@
                         "value": "{{NOW}}"
                       },
                       {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{0}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P2",
+                        "name": ":P3",
                         "value": "{{$_POST.rest_id}}"
                       }
                     ]

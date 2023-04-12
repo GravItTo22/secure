@@ -6,6 +6,7 @@
 <dmx-serverconnect id="scRestaurantList" url="/api/Restaurant/RestaurantList" dmx-param:offset="qm.data.offset" dmx-param:limit="25" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:search_value="formSearch.SearchValue.value.titlecase()" dmx-param:market_id="market_select.value" dmx-param:cat_type_id="cattype_select.value"></dmx-serverconnect>
 <dmx-data-view id="dvRestaurantList" dmx-bind:data="content.scRestaurantList.data.Restaurants.data"></dmx-data-view>
 <dmx-data-detail id="ddRestaurantList" dmx-bind:data="content.dvRestaurantList.data" key="id"></dmx-data-detail>
+<dmx-serverconnect id="scRestDetails" url="/api/Restaurant/RestaurantDetails" noload></dmx-serverconnect>
 <div class="breadcome-area">
     <div class="container-fluid">
         <div class="row">
@@ -95,7 +96,7 @@
                                     <td><button dmx-class:pd-setting="status==1" dmx-class:ds-setting="status==0">{{(status==1)?'Active':'InActive'}}</button></td>
                                     <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                                     <td>
-                                        <button title="Edit" class="pd-setting-ed" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddRestaurantList.select(id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button title="Edit" class="pd-setting-ed" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddRestaurantList.select(id);scRestDetails.load({rest_id: id})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                         <button data-toggle="modal" title="Delete Restaurent" class="pd-setting-ed" data-target="#modalDelete" dmx-on:click="ddRestaurantList.select(id)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>

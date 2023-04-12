@@ -1,0 +1,635 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "rest_id"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "RestaurantDetails",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "FoodApp",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "m_restaurant",
+                "column": "id"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "market_id"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "cat_type_id"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "gen_shop_id"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "shop_name_en"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "shop_name_bn"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "shop_name_hin"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "shop_logo"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "shop_mobile_no"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "is_watsapp"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "watsapp_no"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "email_id"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "owner_name"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "gst_in"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "is_rmc"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "rmc_no"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "is_fsc"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "balance_amount"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "is_sliding_img"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "pan_no"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "address"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "pin"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "kyc_status"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "status"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "remarks"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "created_by"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "created_on"
+              },
+              {
+                "table": "m_restaurant",
+                "column": "updated_on"
+              }
+            ],
+            "table": {
+              "name": "m_restaurant"
+            },
+            "primary": "id",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "m_restaurant.id",
+                  "field": "m_restaurant.id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_GET.rest_id}}",
+                  "data": {
+                    "table": "m_restaurant",
+                    "column": "id",
+                    "type": "number",
+                    "columnObj": {
+                      "type": "increments",
+                      "default": "",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "m_restaurant.deleted_on",
+                  "field": "m_restaurant.deleted_on",
+                  "type": "datetime",
+                  "operator": "is_null",
+                  "value": null,
+                  "data": {
+                    "table": "m_restaurant",
+                    "column": "deleted_on",
+                    "type": "datetime",
+                    "columnObj": {
+                      "type": "timestamp",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "deleted_on"
+                    }
+                  },
+                  "operation": "IS NULL"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "SELECT id, market_id, cat_type_id, gen_shop_id, shop_name_en, shop_name_bn, shop_name_hin, shop_logo, shop_mobile_no, is_watsapp, watsapp_no, email_id, owner_name, gst_in, is_rmc, rmc_no, is_fsc, balance_amount, is_sliding_img, pan_no, address, pin, kyc_status, status, remarks, created_by, created_on, updated_on\nFROM m_restaurant\nWHERE id = :P1 /* {{$_GET.rest_id}} */ AND deleted_on IS NULL",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.rest_id}}"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "number",
+            "name": "id"
+          },
+          {
+            "type": "number",
+            "name": "market_id"
+          },
+          {
+            "type": "number",
+            "name": "cat_type_id"
+          },
+          {
+            "type": "text",
+            "name": "gen_shop_id"
+          },
+          {
+            "type": "text",
+            "name": "shop_name_en"
+          },
+          {
+            "type": "text",
+            "name": "shop_name_bn"
+          },
+          {
+            "type": "text",
+            "name": "shop_name_hin"
+          },
+          {
+            "type": "text",
+            "name": "shop_logo"
+          },
+          {
+            "type": "text",
+            "name": "shop_mobile_no"
+          },
+          {
+            "type": "text",
+            "name": "is_watsapp"
+          },
+          {
+            "type": "text",
+            "name": "watsapp_no"
+          },
+          {
+            "type": "text",
+            "name": "email_id"
+          },
+          {
+            "type": "text",
+            "name": "owner_name"
+          },
+          {
+            "type": "text",
+            "name": "gst_in"
+          },
+          {
+            "type": "text",
+            "name": "is_rmc"
+          },
+          {
+            "type": "text",
+            "name": "rmc_no"
+          },
+          {
+            "type": "text",
+            "name": "is_fsc"
+          },
+          {
+            "type": "text",
+            "name": "balance_amount"
+          },
+          {
+            "type": "text",
+            "name": "is_sliding_img"
+          },
+          {
+            "type": "text",
+            "name": "pan_no"
+          },
+          {
+            "type": "text",
+            "name": "address"
+          },
+          {
+            "type": "text",
+            "name": "pin"
+          },
+          {
+            "type": "text",
+            "name": "kyc_status"
+          },
+          {
+            "type": "number",
+            "name": "status"
+          },
+          {
+            "type": "text",
+            "name": "remarks"
+          },
+          {
+            "type": "number",
+            "name": "created_by"
+          },
+          {
+            "type": "datetime",
+            "name": "created_on"
+          },
+          {
+            "type": "datetime",
+            "name": "updated_on"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "RestKycDetails",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "FoodApp",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_pan"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_gstin"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_rmc"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_fsc"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_aadhar_front"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "upload_aadhar_back"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "other_id_proof"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "bank_account"
+              },
+              {
+                "table": "rest_kyc_doc",
+                "column": "owner_image"
+              }
+            ],
+            "table": {
+              "name": "rest_kyc_doc"
+            },
+            "primary": "id",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "rest_kyc_doc.rest_id",
+                  "field": "rest_kyc_doc.rest_id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_GET.rest_id}}",
+                  "data": {
+                    "table": "rest_kyc_doc",
+                    "column": "rest_id",
+                    "type": "number",
+                    "columnObj": {
+                      "type": "integer",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "rest_id"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "rest_kyc_doc.deleted_on",
+                  "field": "rest_kyc_doc.deleted_on",
+                  "type": "datetime",
+                  "operator": "is_null",
+                  "value": null,
+                  "data": {
+                    "table": "rest_kyc_doc",
+                    "column": "deleted_on",
+                    "type": "datetime",
+                    "columnObj": {
+                      "type": "timestamp",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "deleted_on"
+                    }
+                  },
+                  "operation": "IS NULL"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "SELECT upload_pan, upload_gstin, upload_rmc, upload_fsc, upload_aadhar_front, upload_aadhar_back, other_id_proof, bank_account, owner_image\nFROM rest_kyc_doc\nWHERE rest_id = :P1 /* {{$_GET.rest_id}} */ AND deleted_on IS NULL",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.rest_id}}"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "upload_pan"
+          },
+          {
+            "type": "text",
+            "name": "upload_gstin"
+          },
+          {
+            "type": "text",
+            "name": "upload_rmc"
+          },
+          {
+            "type": "text",
+            "name": "upload_fsc"
+          },
+          {
+            "type": "text",
+            "name": "upload_aadhar_front"
+          },
+          {
+            "type": "text",
+            "name": "upload_aadhar_back"
+          },
+          {
+            "type": "text",
+            "name": "other_id_proof"
+          },
+          {
+            "type": "text",
+            "name": "bank_account"
+          },
+          {
+            "type": "text",
+            "name": "owner_image"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "RestSlidingImage",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "FoodApp",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "rest_sliding_img",
+                "column": "sliding_image1"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "sliding_image2"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "sliding_image3"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "sliding_image4"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "sliding_image5"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "cover_image"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "status"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "created_by"
+              },
+              {
+                "table": "rest_sliding_img",
+                "column": "created_on"
+              }
+            ],
+            "table": {
+              "name": "rest_sliding_img"
+            },
+            "primary": "id",
+            "joins": [],
+            "query": "SELECT sliding_image1, sliding_image2, sliding_image3, sliding_image4, sliding_image5, cover_image, status, created_by, created_on\nFROM rest_sliding_img\nWHERE rest_id = :P1 /* {{$_GET.rest_id}} */ AND deleted_on IS NULL",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.rest_id}}"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "rest_sliding_img.rest_id",
+                  "field": "rest_sliding_img.rest_id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_GET.rest_id}}",
+                  "data": {
+                    "table": "rest_sliding_img",
+                    "column": "rest_id",
+                    "type": "number",
+                    "columnObj": {
+                      "type": "integer",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "rest_id"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "rest_sliding_img.deleted_on",
+                  "field": "rest_sliding_img.deleted_on",
+                  "type": "datetime",
+                  "operator": "is_null",
+                  "value": null,
+                  "data": {
+                    "table": "rest_sliding_img",
+                    "column": "deleted_on",
+                    "type": "datetime",
+                    "columnObj": {
+                      "type": "timestamp",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "deleted_on"
+                    }
+                  },
+                  "operation": "IS NULL"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "sliding_image1"
+          },
+          {
+            "type": "text",
+            "name": "sliding_image2"
+          },
+          {
+            "type": "text",
+            "name": "sliding_image3"
+          },
+          {
+            "type": "text",
+            "name": "sliding_image4"
+          },
+          {
+            "type": "text",
+            "name": "sliding_image5"
+          },
+          {
+            "type": "text",
+            "name": "cover_image"
+          },
+          {
+            "type": "number",
+            "name": "status"
+          },
+          {
+            "type": "number",
+            "name": "created_by"
+          },
+          {
+            "type": "datetime",
+            "name": "created_on"
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}
