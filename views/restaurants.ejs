@@ -140,7 +140,7 @@
                 </div>
                 <h4 class="modal-title">{{content.ddRestaurantList.data.id?'Edit Restaurant':'Add A New Restaurant'}}</h4>
             </div>
-            <form id="scformAddEditRestDetails" is="dmx-serverconnect-form" method="post" action="/api/Restaurant/ResturentAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scRestaurantList.load({market_id: market_select.value, cat_type_id: cattype_select.value});notifMain.success(scformAddEditRestDetails.data)" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
+            <form id="scformAddEditRestDetails" is="dmx-serverconnect-form" method="post" action="/api/Restaurant/ResturentAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scRestaurantList.load({market_id: market_select.value, cat_type_id: cattype_select.value});notifMain.success(scformAddEditRestDetails.data);scRestDetails.load({rest_id: EditRestaurantId.value})" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
                 <div class="modal-body gito-py-0">
                     <div class="row mx-0">
                         <div class="col-12">

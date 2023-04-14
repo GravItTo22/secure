@@ -1452,5 +1452,15 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "promocode": {
+    "tableRepeat2": {
+      "meta": [],
+      "outputType": "array"
+    },
+    "ddPromoCode": {
+      "meta": [],
+      "outputType": "array"
+    }
   }
 });

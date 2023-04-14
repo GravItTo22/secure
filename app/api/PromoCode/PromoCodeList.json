@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "CodeList",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "FoodApp",
+          "sql": {
+            "query": "SELECT id, promo_name, promo_code, auto_apply, allotted_for, user_id, start_date::text, end_date::text, status, created_on::text, created_by, updated_on::text, updated_by, amt_or_percent, promo_amt, promo_per, cashback_amt_or_per, cashback_amt, cashback_per FROM promo_code WHERE deleted_on is null ORDER BY id DESC",
+            "params": []
+          }
+        },
+        "output": true,
+        "meta": [],
+        "outputType": "array"
+      }
+    ]
+  }
+}

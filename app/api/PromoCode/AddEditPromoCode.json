@@ -1,0 +1,605 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/promo-code.ejs",
+      "linkedForm": "scformAddEdit"
+    }
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "output": false,
+        "meta": []
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.EditPromoId}}",
+          "then": {
+            "steps": [
+              {
+                "name": "upPromoCode",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "FoodApp",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "promo_code",
+                        "column": "promo_name",
+                        "type": "text",
+                        "value": "{{$_POST.promo_name}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "promo_code",
+                        "type": "text",
+                        "value": "{{$_POST.promo_code}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "auto_apply",
+                        "type": "text",
+                        "value": "{{$_POST.auto_apply}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "allotted_for",
+                        "type": "text",
+                        "value": "{{$_POST.allotted_for}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "start_date",
+                        "type": "datetime",
+                        "value": "{{$_POST.start_date}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "end_date",
+                        "type": "datetime",
+                        "value": "{{$_POST.end_date}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "status",
+                        "type": "number",
+                        "value": "{{$_POST.status}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "updated_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "updated_by",
+                        "type": "number",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "amt_or_percent",
+                        "type": "text",
+                        "value": "{{$_POST.amt_or_percent}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "promo_amt",
+                        "type": "text",
+                        "value": "{{$_POST.promo_amt}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "promo_per",
+                        "type": "text",
+                        "value": "{{$_POST.promo_per}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "cashback_amt_or_per",
+                        "type": "text",
+                        "value": "{{$_POST.cashback_amt_or_per}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "cashback_amt",
+                        "type": "text",
+                        "value": "{{$_POST.cashback_amt}}"
+                      },
+                      {
+                        "table": "promo_code",
+                        "column": "cashback_per",
+                        "type": "text",
+                        "value": "{{$_POST.cashback_per}}"
+                      }
+                    ],
+                    "table": "promo_code",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "id",
+                          "field": "id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.EditPromoId}}",
+                          "data": {
+                            "column": "id"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "returning": "id",
+                    "query": "UPDATE promo_code\nSET promo_name = :P1 /* {{$_POST.promo_name}} */, promo_code = :P2 /* {{$_POST.promo_code}} */, auto_apply = :P3 /* {{$_POST.auto_apply}} */, allotted_for = :P4 /* {{$_POST.allotted_for}} */, start_date = :P5 /* {{$_POST.start_date}} */, end_date = :P6 /* {{$_POST.end_date}} */, status = :P7 /* {{$_POST.status}} */, updated_on = :P8 /* {{NOW}} */, updated_by = :P9 /* {{identity}} */, amt_or_percent = :P10 /* {{$_POST.amt_or_percent}} */, promo_amt = :P11 /* {{$_POST.promo_amt}} */, promo_per = :P12 /* {{$_POST.promo_per}} */, cashback_amt_or_per = :P13 /* {{$_POST.cashback_amt_or_per}} */, cashback_amt = :P14 /* {{$_POST.cashback_amt}} */, cashback_per = :P15 /* {{$_POST.cashback_per}} */\nWHERE id = :P16 /* {{$_POST.EditPromoId}} */",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{$_POST.promo_name}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_POST.promo_code}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{$_POST.auto_apply}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{$_POST.allotted_for}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{$_POST.start_date}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{$_POST.end_date}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{$_POST.status}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{$_POST.amt_or_percent}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{$_POST.promo_amt}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{$_POST.promo_per}}"
+                      },
+                      {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{$_POST.cashback_amt_or_per}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{$_POST.cashback_amt}}"
+                      },
+                      {
+                        "name": ":P15",
+                        "type": "expression",
+                        "value": "{{$_POST.cashback_per}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P16",
+                        "value": "{{$_POST.EditPromoId}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "message",
+                "module": "core",
+                "action": "response",
+                "options": {
+                  "data": "Promocode Updated Successfully",
+                  "status": 200
+                }
+              }
+            ]
+          },
+          "else": {
+            "steps": [
+              {
+                "name": "GetPromoCode",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "FoodApp",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "promo_code",
+                        "column": "id",
+                        "alias": "CountPromo",
+                        "aggregate": "COUNT"
+                      }
+                    ],
+                    "table": {
+                      "name": "promo_code"
+                    },
+                    "primary": "id",
+                    "joins": [],
+                    "groupBy": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "promo_code.promo_code",
+                          "field": "promo_code.promo_code",
+                          "type": "string",
+                          "operator": "equal",
+                          "value": "{{$_POST.promo_code}}",
+                          "data": {
+                            "table": "promo_code",
+                            "column": "promo_code",
+                            "type": "text",
+                            "columnObj": {
+                              "type": "string",
+                              "maxLength": -5,
+                              "primary": false,
+                              "unique": false,
+                              "nullable": true,
+                              "name": "promo_code"
+                            }
+                          },
+                          "operation": "="
+                        },
+                        {
+                          "id": "promo_code.deleted_on",
+                          "field": "promo_code.deleted_on",
+                          "type": "double",
+                          "operator": "is_null",
+                          "value": null,
+                          "data": {
+                            "table": "promo_code",
+                            "column": "deleted_on",
+                            "type": "number",
+                            "columnObj": {
+                              "type": "integer",
+                              "primary": false,
+                              "unique": false,
+                              "nullable": true,
+                              "name": "deleted_on"
+                            }
+                          },
+                          "operation": "IS NULL"
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT COUNT(id) AS CountPromo\nFROM promo_code\nWHERE promo_code = :P1 /* {{$_POST.promo_code}} */ AND deleted_on IS NULL",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{$_POST.promo_code}}"
+                      }
+                    ]
+                  }
+                },
+                "output": false,
+                "meta": [
+                  {
+                    "type": "number",
+                    "name": "CountPromo"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{(GetPromoCode.CountPromo>0)}}",
+                  "then": {
+                    "steps": [
+                      {
+                        "name": "AddPromoCode",
+                        "module": "dbupdater",
+                        "action": "insert",
+                        "options": {
+                          "connection": "FoodApp",
+                          "sql": {
+                            "type": "insert",
+                            "values": [
+                              {
+                                "table": "promo_code",
+                                "column": "promo_name",
+                                "type": "text",
+                                "value": "{{$_POST.promo_name}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "promo_code",
+                                "type": "text",
+                                "value": "{{$_POST.promo_code}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "auto_apply",
+                                "type": "text",
+                                "value": "{{$_POST.auto_apply}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "allotted_for",
+                                "type": "text",
+                                "value": "{{$_POST.allotted_for}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "start_date",
+                                "type": "datetime",
+                                "value": "{{$_POST.start_date}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "end_date",
+                                "type": "datetime",
+                                "value": "{{$_POST.end_date}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "status",
+                                "type": "number",
+                                "value": "{{1}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "created_on",
+                                "type": "datetime",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "created_by",
+                                "type": "number",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "amt_or_percent",
+                                "type": "text",
+                                "value": "{{$_POST.amt_or_percent}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "promo_amt",
+                                "type": "text",
+                                "value": "{{$_POST.promo_amt}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "promo_per",
+                                "type": "text",
+                                "value": "{{$_POST.promo_per}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "cashback_amt_or_per",
+                                "type": "text",
+                                "value": "{{$_POST.cashback_amt_or_per}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "cashback_amt",
+                                "type": "text",
+                                "value": "{{$_POST.cashback_amt}}"
+                              },
+                              {
+                                "table": "promo_code",
+                                "column": "cashback_per",
+                                "type": "text",
+                                "value": "{{$_POST.cashback_per}}"
+                              }
+                            ],
+                            "table": "promo_code",
+                            "returning": "id",
+                            "query": "INSERT INTO promo_code\n(promo_name, promo_code, auto_apply, allotted_for, start_date, end_date, status, created_on, created_by, amt_or_percent, promo_amt, promo_per, cashback_amt_or_per, cashback_amt, cashback_per) VALUES (:P1 /* {{$_POST.promo_name}} */, :P2 /* {{$_POST.promo_code}} */, :P3 /* {{$_POST.auto_apply}} */, :P4 /* {{$_POST.allotted_for}} */, :P5 /* {{$_POST.start_date}} */, :P6 /* {{$_POST.end_date}} */, :P7 /* {{1}} */, :P8 /* {{NOW}} */, :P9 /* {{identity}} */, :P10 /* {{$_POST.amt_or_percent}} */, :P11 /* {{$_POST.promo_amt}} */, :P12 /* {{$_POST.promo_per}} */, :P13 /* {{$_POST.cashback_amt_or_per}} */, :P14 /* {{$_POST.cashback_amt}} */, :P15 /* {{$_POST.cashback_per}} */)",
+                            "params": [
+                              {
+                                "name": ":P1",
+                                "type": "expression",
+                                "value": "{{$_POST.promo_name}}"
+                              },
+                              {
+                                "name": ":P2",
+                                "type": "expression",
+                                "value": "{{$_POST.promo_code}}"
+                              },
+                              {
+                                "name": ":P3",
+                                "type": "expression",
+                                "value": "{{$_POST.auto_apply}}"
+                              },
+                              {
+                                "name": ":P4",
+                                "type": "expression",
+                                "value": "{{$_POST.allotted_for}}"
+                              },
+                              {
+                                "name": ":P5",
+                                "type": "expression",
+                                "value": "{{$_POST.start_date}}"
+                              },
+                              {
+                                "name": ":P6",
+                                "type": "expression",
+                                "value": "{{$_POST.end_date}}"
+                              },
+                              {
+                                "name": ":P7",
+                                "type": "expression",
+                                "value": "{{1}}"
+                              },
+                              {
+                                "name": ":P8",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P9",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P10",
+                                "type": "expression",
+                                "value": "{{$_POST.amt_or_percent}}"
+                              },
+                              {
+                                "name": ":P11",
+                                "type": "expression",
+                                "value": "{{$_POST.promo_amt}}"
+                              },
+                              {
+                                "name": ":P12",
+                                "type": "expression",
+                                "value": "{{$_POST.promo_per}}"
+                              },
+                              {
+                                "name": ":P13",
+                                "type": "expression",
+                                "value": "{{$_POST.cashback_amt_or_per}}"
+                              },
+                              {
+                                "name": ":P14",
+                                "type": "expression",
+                                "value": "{{$_POST.cashback_amt}}"
+                              },
+                              {
+                                "name": ":P15",
+                                "type": "expression",
+                                "value": "{{$_POST.cashback_per}}"
+                              }
+                            ]
+                          }
+                        },
+                        "meta": [
+                          {
+                            "name": "identity",
+                            "type": "text"
+                          },
+                          {
+                            "name": "affected",
+                            "type": "number"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "message",
+                        "module": "core",
+                        "action": "response",
+                        "options": {
+                          "data": "New Promocode Added Successfully",
+                          "status": 200
+                        }
+                      }
+                    ]
+                  },
+                  "else": {
+                    "steps": [
+                      {
+                        "name": "status",
+                        "module": "core",
+                        "action": "setvalue",
+                        "options": {
+                          "value": 403
+                        },
+                        "meta": [],
+                        "output": true,
+                        "outputType": "text"
+                      },
+                      {
+                        "name": "message",
+                        "module": "core",
+                        "action": "setvalue",
+                        "options": {
+                          "value": "{{'This code ('+$_POST.promo_code+') is already exist in the database, you can edit this.'}}"
+                        },
+                        "meta": [],
+                        "output": true,
+                        "outputType": "text"
+                      }
+                    ]
+                  }
+                },
+                "outputType": "boolean"
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

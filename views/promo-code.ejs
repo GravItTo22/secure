@@ -1,0 +1,256 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="promocode" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{}}" -->
+<meta name="ac:route" content="/promo-code">
+<dmx-serverconnect id="scMarketList" url="/api/Location/ActiveMarketList"></dmx-serverconnect>
+<dmx-serverconnect id="scCategoryType" url="/api/Category/ActiveCategoryType"></dmx-serverconnect>
+<dmx-serverconnect id="scPromoCode" url="/api/PromoCode/PromoCodeList"></dmx-serverconnect>
+<dmx-data-detail id="ddPromoCode" dmx-bind:data="content.scPromoCode.data.CodeList" key="id"></dmx-data-detail>
+<dmx-serverconnect id="scDelPromoCode" url="/api/PromoCode/DeletePromoCode" noload></dmx-serverconnect>
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="icon nalika-home"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>PromoCode List</h2>
+                                    <p>Total:<span class="bread-ntd panel-heading" dmx-text="content.scCategoryList.data.CategoryList.data.length"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+                            <div class="breadcomb-report">
+                                <select class="form-control pro-edt-select form-control-primary" type="text" id="market_select" dmx-bind:options="scMarketList.data.ActiveMarkets" optionvalue="id" dmx-bind:value="1" optiontext="market_name_en">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+                            <div class="breadcomb-report">
+                                <select class="form-control pro-edt-select form-control-primary" type="text" id="cattype_select" dmx-bind:options="scCategoryType.data.CatrgoryType" optionvalue="id" optiontext="type_name_en" dmx-bind:value="1">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>All PromoCode List</h4>
+                    <div class="add-product">
+                        <a href="#" data-toggle="modal" data-target="#modalAddEdit">Add New PromoCode</a>
+                    </div>
+                    <div class="breadcome-heading">
+                        <form role="search" class="" id="formSearch">
+                            <input type="text" placeholder="Search..." class="form-control" id="SearchValue">
+                            <a href=""><i class="fa fa-search"></i></a>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Promo name</th>
+                                    <th>Promo code</th>
+                                    <th>Auto apply</th>
+                                    <th>Allotted for</th>
+                                    <th>User</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                    <th>Amt or percent</th>
+                                    <th>Promo amt</th>
+                                    <th>Promo per</th>
+                                    <th>Cashback amt or per</th>
+                                    <th>Cashback amt</th>
+                                    <th>Cashback per</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                    <th>Created on</th>
+                                    <th>Updated on</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scPromoCode.data.CodeList" id="tableRepeat2">
+                                <tr>
+                                    <td dmx-text="id"></td>
+                                    <td dmx-text="promo_name"></td>
+                                    <td dmx-text="promo_code"></td>
+                                    <td dmx-text="auto_apply"></td>
+                                    <td dmx-text="allotted_for"></td>
+                                    <td dmx-text="user_id"></td>
+                                    <td dmx-text="start_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                                    <td dmx-text="end_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                                    <td dmx-text="amt_or_percent"></td>
+                                    <td dmx-text="promo_amt"></td>
+                                    <td dmx-text="promo_per"></td>
+                                    <td dmx-text="cashback_amt_or_per"></td>
+                                    <td dmx-text="cashback_amt"></td>
+                                    <td dmx-text="cashback_per"></td>
+                                    <td><button dmx-class:pd-setting="status==1" dmx-class:ds-setting="status==0">{{(status==1)?'Active':'InActive'}}</button></td>
+                                    <td>
+                                        <button title="Edit" class="pd-setting-ed" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddPromoCode.select(id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="modal" title="Delete Promo Code" class="pd-setting-ed" data-target="#modalDelete" dmx-on:click="ddPromoCode.select(id)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                                    </td>
+                                    <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                                    <td dmx-text="updated_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-light" dmx-show="content.scPromoCode.data.CodeList.length==0">
+                        <p class="text-center fa-2x text-warning">
+                            No record Found!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal start -->
+<div id="modalAddEdit" class="modal modal-adminpro-general Customwidth-popup-WarningModal fade" role="dialog" is="dmx-bs5-modal" tabindex="-1">
+    <form id="scformAddEdit" is="dmx-serverconnect-form" method="post" action="/api/PromoCode/AddEditPromoCode" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scPromoCode.load({});notifMain.success(scformAddEdit.data);scformAddEdit.reset(true)" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response.data.validate_1)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-close-area modal-close-df" dmx-on:click="scformAddEdit.reset(true);ddPromoCode.select(0)">
+                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                    </div>
+                    <h4 class="modal-title">{{content.ddPromoCode.data.id?'Edit Promo Code':'Add A New Promo Code'}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mx-0">
+                        <input type="hidden" name="EditPromoId" id="EditPromoId" dmx-bind:value="content.ddPromoCode.data.id">
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Promo Name<span class="compulsory">*</span></label>
+                            <input type="text" class="select2_demo_3 form-control" name="promo_name" required="" dmx-bind:value="content.ddPromoCode.data.promo_name">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Promo Code<span class="compulsory">*</span></label>
+                            <input type="text" class="select2_demo_3 form-control" name="promo_code" required="" dmx-bind:value="content.ddPromoCode.data.promo_code">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Auto Apply<span class="compulsory">*</span></label>
+                            <select class="select2_demo_3 form-control" id="auto_apply" name="auto_apply" dmx-bind:value="content.ddPromoCode.data.auto_apply">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Allot For<span class="compulsory">*</span></label>
+                            <select class="select2_demo_3 form-control" id="allotted_for" name="allotted_for" dmx-bind:value="content.ddPromoCode.data.allotted_for">
+                                <option value="All">All</option>
+                                <option value="Individual">Individual</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Start Date<span class="compulsory">*</span></label>
+                            <input type="datetime-local" class="select2_demo_3 form-control" name="start_date" required="" dmx-bind:value="content.ddPromoCode.data.start_date">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>End Date<span class="compulsory">*</span></label>
+                            <input type="datetime-local" class="select2_demo_3 form-control" name="end_date" required="" dmx-bind:value="content.ddPromoCode.data.end_date">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Promo Amount or %</label>
+                            <select class="select2_demo_3 form-control" id="amt_or_percent" name="amt_or_percent" dmx-bind:value="content.ddPromoCode.data.amt_or_percent">
+                                <option value="">Select</option>
+                                <option value="AMT">AMOUNT</option>
+                                <option value="PER">PERCENT</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Promo AMOUNT<span class="compulsory">*</span></label>
+                            <input type="number" class="select2_demo_3 form-control" name="promo_amt" required="" dmx-bind:value="content.ddPromoCode.data.promo_amt?content.ddPromoCode.data.promo_amt:0" placeholder="could not be blank, put (zero) 0 for no value">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Promo PERCENT(%)<span class="compulsory">*</span></label>
+                            <input type="number" class="select2_demo_3 form-control" name="promo_per" required="" dmx-bind:value="content.ddPromoCode.data.promo_per:content.ddPromoCode.data.promo_per:0" placeholder="could not be blank, put (zero) 0 for no value">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Cashback Amount or %</label>
+                            <select class="select2_demo_3 form-control" id="cashback_amt_or_per" name="cashback_amt_or_per" dmx-bind:value="content.ddPromoCode.data.cashback_amt_or_per">
+                                <option value="">Select</option>
+                                <option value="AMT">AMOUNT</option>
+                                <option value="PER">PERCENT</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Cashback AMOUNT<span class="compulsory">*</span></label>
+                            <input type="number" class="select2_demo_3 form-control" name="cashback_amt" required="" dmx-bind:value="content.ddPromoCode.data.cashback_amt?content.ddPromoCode.data.cashback_amt:0" placeholder="could not be blank, put (zero) 0 for no value">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15">
+                            <label>Cashback PERCENT(%)<span class="compulsory">*</span></label>
+                            <input type="number" class="select2_demo_3 form-control" name="cashback_per" required="" dmx-bind:value="content.ddPromoCode.data.cashback_per?content.ddPromoCode.data.cashback_per:0" placeholder="could not be blank, put (zero) 0 for no value">
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15" dmx-show="content.ddPromoCode.data.id">
+                            <label>Status</label>
+                            <select class="select2_demo_3 form-control" id="status" name="status" dmx-bind:value="content.ddPromoCode.data.status">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mg-b-15" dmx-show="content.ddPromoCode.data.id">
+                            <label>Remarks</label>
+                            <textarea type="text" class="select2_demo_3 form-control" name="remarks" id="remarks" placeholder="Enter Any remarks" dmx-bind:value="content.ddPromoCode.data.remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">{{content.ddPromoCode.data.id?'Update':'Submit'}}<span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
+                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEdit.reset(true)">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Modal AddEdit End -->
+<!-- modal Rest Delete start -->
+<div id="modalDelete" class="modal modal-adminpro-general Customwidth-popup-WarningModal fade" role="dialog" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-close-area modal-close-df" dmx-on:click="scformDelRest.reset(true);ddPromoCode.select(0)">
+                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                </div>
+                <h4 class="modal-title">Delete PromoCode</h4>
+            </div>
+            <form id="scformDelRest" is="dmx-serverconnect-form" method="post" action="/api/PromoCode/DeletePromoCode" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scPromoCode.load({});notifMain.success(scformDelRest.data);modalDelete.hide()" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
+                <div class="modal-body gito-py-0">
+                    <div class="row mx-0">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="review-content-section row mx-0">
+                                <input type="hidden" name="code_id" id="EditDelId" dmx-bind:value="content.ddPromoCode.data.id">
+
+                                <label class="text-info col-12 col-md-4">Are you sure to delete this PromoCode?</label>
+                                <div class="input-group mg-b-pro-edt col-12 col-md-6">
+                                    <span class="input-group-addon"><i class="icon nalika-info" aria-hidden="true"></i></span>
+                                    <select type="text" class="form-control" id="is_del" name="delete">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">Delete <span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
+                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformDelRest.reset(true);ddPromoCode.select(0)">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
