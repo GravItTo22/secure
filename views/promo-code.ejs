@@ -210,7 +210,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">{{content.ddPromoCode.data.id?'Update':'Submit'}}<span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
-                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEdit.reset(true)">Close</button>
+                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEdit.reset(true);ddPromoCode.select(0)">Close</button>
                 </div>
             </div>
         </div>
