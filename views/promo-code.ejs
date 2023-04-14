@@ -177,7 +177,7 @@
                         </div>
                         <div class="col-12 col-md-6 mg-b-15">
                             <label>Promo PERCENT(%)<span class="compulsory">*</span></label>
-                            <input type="number" class="select2_demo_3 form-control" name="promo_per" required="" dmx-bind:value="content.ddPromoCode.data.promo_per:content.ddPromoCode.data.promo_per:0" placeholder="could not be blank, put (zero) 0 for no value">
+                            <input type="number" class="select2_demo_3 form-control" name="promo_per" required="" dmx-bind:value="content.ddPromoCode.data.promo_per?content.ddPromoCode.data.promo_per:0" placeholder="could not be blank, put (zero) 0 for no value">
                         </div>
                         <div class="col-12 col-md-6 mg-b-15">
                             <label>Cashback Amount or %</label>
