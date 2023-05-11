@@ -1635,7 +1635,7 @@
                           "url": "https://clicke.co.in/eapi/sendMessage",
                           "params": {
                             "auth_key": "{{'8H6jmHrEI9Gag1dVY14a'}}",
-                            "message": "{{'Dear '+$_POST.owner_name+', Your '+$_POST.shop_name_en+' shop have successfully registered to Gravitto and your auto generated password is '+password+' , you can reset it by using Change Password after login or using Forgot Password.\\n\\nFrom GRAVITTO CLOWKPRO\\n\\n\\n'}}",
+                            "message": "{{'Dear '+$_POST.owner_name+', Your '+$_POST.shop_name_en+' shop have successfully registered to Gravitto and your auto generated password is '+password+', you can reset it by using Change Password after login or using Forgot Password.\\n\\nFrom GRAVITTO CLOWKPRO\\n\\n\\n'}}",
                             "mobileNumber": "{{91+$_POST.shop_mobile_no}}",
                             "type": "{{'msg'}}"
                           }
@@ -1647,7 +1647,7 @@
                         "module": "api",
                         "action": "send",
                         "options": {
-                          "url": "{{'http://43.252.88.230/index.php/smsapi/httpapi/?secret=HiBS1oPl6ln4daFZyQGa&sender=CLOWKP&tempid=1007077113824347526&receiver='+$_POST.shop_mobile_no+'&route=TA&msgtype=3&sms=Dear '+$_POST.shop_name_en+', Your Reg. is successful and auto generated password is '+password+' From CLOWKPRO'}}"
+                          "url": "{{'http://43.252.88.250/index.php/smsapi/httpapi/?secret=HiBS1oPl6ln4daFZyQGa&sender=CLOWKP&tempid=1007077113824347526&receiver='+$_POST.shop_mobile_no+'&route=TA&msgtype=3&sms=Dear '+$_POST.shop_name_en+', Your Reg. is successful and auto generated password is '+password+' From CLOWKPRO'}}"
                         },
                         "output": false
                       }
@@ -5113,8 +5113,8 @@
                   "url": "https://clicke.co.in/eapi/sendMessage",
                   "params": {
                     "auth_key": "{{'8H6jmHrEI9Gag1dVY14a'}}",
-                    "message": "{{'Dear '+$_POST.FName+' '+$_POST.LName+', You have successfully signup to Gravitto and your auto generated password is '+Password+' , you can reset it by using Change Password after login or using forgot password.\\n\\nFrom GRAVITTO CLOWKPRO\\n\\n'}}",
-                    "mobileNumber": "{{91+$_POST.Mobile}}",
+                    "message": "{{'Dear '+$_POST.shop_name_en+' '+$_POST.owner_name+', You have successfully signup to Gravitto and your auto generated password is '+password+' , you can reset it by using Change Password after login or using forgot password.\\n\\nFrom GRAVITTO CLOWKPRO\\n\\n'}}",
+                    "mobileNumber": "{{91+$_POST.shop_mobile_no}}",
                     "type": "{{'msg'}}"
                   }
                 },
@@ -5125,7 +5125,7 @@
                 "module": "api",
                 "action": "send",
                 "options": {
-                  "url": "{{'http://43.252.88.230/index.php/smsapi/httpapi/?secret=HiBS1oPl6ln4daFZyQGa&sender=CLOWKP&tempid=1007077113824347526&receiver='+$_POST.Mobile+'&route=TA&msgtype=3&sms=Dear '+$_POST.FName+', Your Reg. is successful and auto generated password is '+Password+' From CLOWKPRO'}}"
+                  "url": "{{'http://43.252.88.250/index.php/smsapi/httpapi/?secret=HiBS1oPl6ln4daFZyQGa&sender=CLOWKP&tempid=1007077113824347526&receiver='+$_POST.shop_mobile_no+'&route=TA&msgtype=3&sms=Dear '+$_POST.shop_name_en+', Your Reg. is successful and auto generated password is '+password+' From CLOWKPRO'}}"
                 },
                 "output": false
               },
