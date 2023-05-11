@@ -88,7 +88,9 @@
         "type": "text",
         "fieldName": "email_id",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:email": {}
+          }
         },
         "name": "email_id"
       },
@@ -118,20 +120,20 @@
         "name": "logo",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -142,20 +144,20 @@
         "name": "CoverImage",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -166,20 +168,20 @@
         "name": "SlidingImage1",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -190,20 +192,20 @@
         "name": "SlidingImage2",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -214,20 +216,20 @@
         "name": "SlidingImage3",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -238,20 +240,20 @@
         "name": "upload_pan",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -262,20 +264,20 @@
         "name": "upload_gstin",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -286,20 +288,20 @@
         "name": "upload_rmc",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -310,20 +312,20 @@
         "name": "upload_fsc",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -334,20 +336,20 @@
         "name": "upload_aadhar_front",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -358,20 +360,20 @@
         "name": "upload_aadhar_back",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -382,20 +384,20 @@
         "name": "other_id_proof",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -406,20 +408,20 @@
         "name": "bank_account",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -430,20 +432,20 @@
         "name": "owner_image",
         "sub": [
           {
-            "type": "text",
-            "name": "name"
+            "name": "name",
+            "type": "text"
           },
           {
-            "type": "text",
-            "name": "type"
+            "name": "type",
+            "type": "text"
           },
           {
-            "type": "number",
-            "name": "size"
+            "name": "size",
+            "type": "number"
           },
           {
-            "type": "text",
-            "name": "error"
+            "name": "error",
+            "type": "text"
           }
         ],
         "outputType": "file"
@@ -465,39 +467,23 @@
       },
       {
         "type": "text",
-        "name": "agreement_copy1"
+        "fieldName": "is_sliding_img",
+        "name": "is_sliding_img"
       },
       {
         "type": "text",
-        "name": "agreement_copy2"
-      },
-      {
-        "type": "text",
-        "name": "agreement_copy3"
-      },
-      {
-        "type": "text",
-        "name": "agreement_copy4"
-      },
-      {
-        "type": "text",
-        "name": "user_password"
-      },
-      {
-        "type": "text",
-        "name": "ip_address"
-      },
-      {
-        "type": "text",
-        "name": "blank1"
-      },
-      {
-        "type": "number",
+        "fieldName": "status",
         "name": "status"
       },
       {
-        "type": "number",
-        "name": "id"
+        "type": "text",
+        "fieldName": "address",
+        "name": "address"
+      },
+      {
+        "type": "text",
+        "fieldName": "remarks",
+        "name": "remarks"
       }
     ],
     "$_SERVER": [
@@ -1255,13 +1241,13 @@
                               "table": "m_customer",
                               "column": "is_watsapp",
                               "type": "text",
-                              "value": "{{$_POST.whatsapp_no}}"
+                              "value": "{{$_POST.is_watsapp}}"
                             },
                             {
                               "table": "m_customer",
                               "column": "watsapp_no",
                               "type": "text",
-                              "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                              "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                             },
                             {
                               "table": "m_customer",
@@ -1292,6 +1278,12 @@
                               "column": "updated_on",
                               "type": "datetime",
                               "value": "{{NOW}}"
+                            },
+                            {
+                              "table": "m_customer",
+                              "column": "address",
+                              "type": "text",
+                              "value": "{{$_POST.address}}"
                             }
                           ],
                           "table": "m_customer",
@@ -1325,7 +1317,7 @@
                             "valid": true
                           },
                           "returning": "id",
-                          "query": "UPDATE m_customer\nSET user_type_id = :P1 /* {{4}} */, fname = :P2 /* {{$_POST.shop_name_en}} */, lname = :P3 /* {{$_POST.owner_name}} */, mobile = :P4 /* {{$_POST.shop_mobile_no}} */, is_watsapp = :P5 /* {{$_POST.whatsapp_no}} */, watsapp_no = :P6 /* {{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}} */, customer_email = :P7 /* {{$_POST.email_id}} */, pin = :P8 /* {{$_POST.pin}} */, gst_in = :P9 /* {{$_POST.gst_in}} */, status = :P10 /* {{$_POST.status}} */, updated_on = :P11 /* {{NOW}} */\nWHERE mobile = :P12 /* {{$_POST.shop_mobile_no}} */ AND deleted_on IS NULL",
+                          "query": "UPDATE m_customer\nSET user_type_id = :P1 /* {{4}} */, fname = :P2 /* {{$_POST.shop_name_en}} */, lname = :P3 /* {{$_POST.owner_name}} */, mobile = :P4 /* {{$_POST.shop_mobile_no}} */, is_watsapp = :P5 /* {{$_POST.is_watsapp}} */, watsapp_no = :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, customer_email = :P7 /* {{$_POST.email_id}} */, pin = :P8 /* {{$_POST.pin}} */, gst_in = :P9 /* {{$_POST.gst_in}} */, status = :P10 /* {{$_POST.status}} */, updated_on = :P11 /* {{NOW}} */, address = :P12 /* {{$_POST.address}} */\nWHERE mobile = :P13 /* {{$_POST.shop_mobile_no}} */ AND deleted_on IS NULL",
                           "params": [
                             {
                               "name": ":P1",
@@ -1350,12 +1342,12 @@
                             {
                               "name": ":P5",
                               "type": "expression",
-                              "value": "{{$_POST.whatsapp_no}}"
+                              "value": "{{$_POST.is_watsapp}}"
                             },
                             {
                               "name": ":P6",
                               "type": "expression",
-                              "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                              "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                             },
                             {
                               "name": ":P7",
@@ -1383,9 +1375,14 @@
                               "value": "{{NOW}}"
                             },
                             {
+                              "name": ":P12",
+                              "type": "expression",
+                              "value": "{{$_POST.address}}"
+                            },
+                            {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P12",
+                              "name": ":P13",
                               "value": "{{$_POST.shop_mobile_no}}"
                             }
                           ]
@@ -1438,13 +1435,13 @@
                                 "table": "m_customer",
                                 "column": "is_watsapp",
                                 "type": "text",
-                                "value": "{{$_POST.whatsapp_no}}"
+                                "value": "{{$_POST.is_watsapp}}"
                               },
                               {
                                 "table": "m_customer",
                                 "column": "watsapp_no",
                                 "type": "text",
-                                "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                                "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                               },
                               {
                                 "table": "m_customer",
@@ -1517,11 +1514,17 @@
                                 "column": "created_on",
                                 "type": "datetime",
                                 "value": "{{NOW}}"
+                              },
+                              {
+                                "table": "m_customer",
+                                "column": "address",
+                                "type": "text",
+                                "value": "{{$_POST.address}}"
                               }
                             ],
                             "table": "m_customer",
                             "returning": "id",
-                            "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.whatsapp_no}} */, :P6 /* {{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */)",
+                            "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */, :P19 /* {{$_POST.address}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -1546,12 +1549,12 @@
                               {
                                 "name": ":P5",
                                 "type": "expression",
-                                "value": "{{$_POST.whatsapp_no}}"
+                                "value": "{{$_POST.is_watsapp}}"
                               },
                               {
                                 "name": ":P6",
                                 "type": "expression",
-                                "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                                "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                               },
                               {
                                 "name": ":P7",
@@ -1612,6 +1615,11 @@
                                 "name": ":P18",
                                 "type": "expression",
                                 "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P19",
+                                "type": "expression",
+                                "value": "{{$_POST.address}}"
                               }
                             ]
                           }
@@ -3931,13 +3939,13 @@
                         "table": "m_customer",
                         "column": "is_watsapp",
                         "type": "text",
-                        "value": "{{$_POST.whatsapp_no}}"
+                        "value": "{{$_POST.is_watsapp}}"
                       },
                       {
                         "table": "m_customer",
                         "column": "watsapp_no",
                         "type": "text",
-                        "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                        "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                       },
                       {
                         "table": "m_customer",
@@ -4010,11 +4018,17 @@
                         "column": "created_on",
                         "type": "datetime",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "m_customer",
+                        "column": "address",
+                        "type": "text",
+                        "value": "{{$_POST.address}}"
                       }
                     ],
                     "table": "m_customer",
                     "returning": "id",
-                    "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.whatsapp_no}} */, :P6 /* {{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */)",
+                    "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */, :P19 /* {{$_POST.address}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -4039,12 +4053,12 @@
                       {
                         "name": ":P5",
                         "type": "expression",
-                        "value": "{{$_POST.whatsapp_no}}"
+                        "value": "{{$_POST.is_watsapp}}"
                       },
                       {
                         "name": ":P6",
                         "type": "expression",
-                        "value": "{{(($_POST.whatsapp_no=='Yes')?$_POST.shop_mobile_no:'')}}"
+                        "value": "{{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}}"
                       },
                       {
                         "name": ":P7",
@@ -4105,6 +4119,11 @@
                         "name": ":P18",
                         "type": "expression",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P19",
+                        "type": "expression",
+                        "value": "{{$_POST.address}}"
                       }
                     ]
                   }
