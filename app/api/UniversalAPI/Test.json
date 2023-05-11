@@ -30,12 +30,11 @@
       "params": {
         "auth_key": "{{'8H6jmHrEI9Gag1dVY14a'}}",
         "message": "{{abc_copy}}",
-        "mobileNumber": "{{917002852528}}",
+        "mobileNumber": "{{91+abc}}",
         "type": "{{'msg'}}"
       }
     },
-    "output": true,
-    "disabled": true
+    "output": true
   },
   {
     "name": "SMSapi",
@@ -44,6 +43,7 @@
     "options": {
       "url": "http://43.252.88.250/index.php/smsapi/httpapi/?secret=HiBS1oPl6ln4daFZyQGa&sender=CLOWKP&tempid=1007077113824347526&receiver=7002852528&route=TA&msgtype=3&sms=Dear ABC, Your Reg. is successful and auto generated password is 14524 From CLOWKPRO"
     },
-    "output": true
+    "output": true,
+    "disabled": true
   }
 ]
