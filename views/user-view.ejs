@@ -142,7 +142,7 @@
                         <input type="hidden" name="AddUserId" id="AddUserId" dmx-bind:value="content.ddUserList.data.id">
                         <div class="col-12 col-md-6 mg-b-15">
                             <label>User Type <span class="compulsory">*</span></label>
-                            <select class="select2_demo_3 form-control" dmx-bind:options="content.scUserType.data.UserTypeList.data" optiontext="type_name" optionvalue="id" required="" name="user_type_name" dmx-bind:value="content.ddUserList.data.user_type_id">
+                            <select class="select2_demo_3 form-control" dmx-bind:options="content.scUserType.data.UserTypeList.data" optiontext="type_name" optionvalue="id" required="" name="user_type_name" dmx-bind:value="content.ddUserList.data.user_type_id" dmx-bind:disabled="(scUserType.data.UserTypeList.data[$index].id==4)">
                                 <option value="">Select</option>
                             </select>
                         </div>
