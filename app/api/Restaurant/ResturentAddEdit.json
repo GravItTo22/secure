@@ -1324,17 +1324,6 @@
                             "condition": "AND",
                             "rules": [
                               {
-                                "id": "mobile",
-                                "field": "mobile",
-                                "type": "string",
-                                "operator": "equal",
-                                "value": "{{$_POST.shop_mobile_no}}",
-                                "data": {
-                                  "column": "mobile"
-                                },
-                                "operation": "="
-                              },
-                              {
                                 "id": "deleted_on",
                                 "field": "deleted_on",
                                 "type": "datetime",
@@ -1344,13 +1333,41 @@
                                   "column": "deleted_on"
                                 },
                                 "operation": "IS NULL"
+                              },
+                              {
+                                "condition": "OR",
+                                "rules": [
+                                  {
+                                    "id": "mobile",
+                                    "field": "mobile",
+                                    "type": "string",
+                                    "operator": "equal",
+                                    "value": "{{$_POST.shop_mobile_no}}",
+                                    "data": {
+                                      "column": "mobile"
+                                    },
+                                    "operation": "="
+                                  },
+                                  {
+                                    "id": "fname",
+                                    "field": "fname",
+                                    "type": "string",
+                                    "operator": "equal",
+                                    "value": "{{$_POST.shop_name_en}}",
+                                    "data": {
+                                      "column": "fname"
+                                    },
+                                    "operation": "="
+                                  }
+                                ],
+                                "conditional": null
                               }
                             ],
                             "conditional": null,
                             "valid": true
                           },
                           "returning": "id",
-                          "query": "UPDATE m_customer\nSET user_type_id = :P1 /* {{4}} */, fname = :P2 /* {{$_POST.shop_name_en}} */, lname = :P3 /* {{$_POST.owner_name}} */, mobile = :P4 /* {{$_POST.shop_mobile_no}} */, is_watsapp = :P5 /* {{$_POST.is_watsapp}} */, watsapp_no = :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, customer_email = :P7 /* {{$_POST.email_id}} */, pin = :P8 /* {{$_POST.pin}} */, gst_in = :P9 /* {{$_POST.gst_in}} */, status = :P10 /* {{$_POST.status}} */, updated_on = :P11 /* {{NOW}} */, address = :P12 /* {{$_POST.address}} */\nWHERE mobile = :P13 /* {{$_POST.shop_mobile_no}} */ AND deleted_on IS NULL",
+                          "query": "UPDATE m_customer\nSET user_type_id = :P1 /* {{4}} */, fname = :P2 /* {{$_POST.shop_name_en}} */, lname = :P3 /* {{$_POST.owner_name}} */, mobile = :P4 /* {{$_POST.shop_mobile_no}} */, is_watsapp = :P5 /* {{$_POST.is_watsapp}} */, watsapp_no = :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, customer_email = :P7 /* {{$_POST.email_id}} */, pin = :P8 /* {{$_POST.pin}} */, gst_in = :P9 /* {{$_POST.gst_in}} */, status = :P10 /* {{$_POST.status}} */, updated_on = :P11 /* {{NOW}} */, address = :P12 /* {{$_POST.address}} */\nWHERE deleted_on IS NULL AND (mobile = :P13 /* {{$_POST.shop_mobile_no}} */ OR fname = :P14 /* {{$_POST.shop_name_en}} */)",
                           "params": [
                             {
                               "name": ":P1",
@@ -1417,6 +1434,12 @@
                               "type": "expression",
                               "name": ":P13",
                               "value": "{{$_POST.shop_mobile_no}}"
+                            },
+                            {
+                              "operator": "equal",
+                              "type": "expression",
+                              "name": ":P14",
+                              "value": "{{$_POST.shop_name_en}}"
                             }
                           ]
                         }
