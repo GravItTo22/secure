@@ -84,6 +84,11 @@
     {
       "path": "*",
       "page": "404-not-found"
+    },
+    {
+      "path": "/order-list",
+      "page": "order-list",
+      "layout": "main"
     }
   ],
   "layouts": {

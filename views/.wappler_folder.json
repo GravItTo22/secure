@@ -74,5 +74,9 @@
   "promo-code.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "order-list.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
