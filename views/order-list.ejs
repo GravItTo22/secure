@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" -->
+<!-- Wappler include head-page="layouts/main" is="dmx-app" id="orderlist" appConnect="local" components="{dmxDataTraversal:{}}" components="{dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5Modal:{}}" bootstrap5="cdn" -->
 <meta name="ac:route" content="/order-list">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scMarketList" url="/api/Location/ActiveMarketList"></dmx-serverconnect>
@@ -8,7 +8,7 @@
 <dmx-serverconnect id="scProdMark" url="/api/Product/ActiveProductMark"></dmx-serverconnect>
 <dmx-serverconnect id="scProdoccurrance" url="/api/Product/ActiveProductOccurance"></dmx-serverconnect>
 <dmx-serverconnect id="scRestaurants" url="/api/Restaurant/ActiveRestaurants" dmx-param:market_id="market_select.value" dmx-param:category_type_id="cattype_select.value"></dmx-serverconnect>
-<dmx-serverconnect id="scProductList" url="/api/Product/ProductList" dmx-param:offset="qm.data.offset" dmx-param:limit="25" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:search_value="formSearch.SearchValue.value.titlecase()" dmx-param:market_id="market_select.value" dmx-param:cat_type_id="cattype_select.value" dmx-param:restaurant_id="restaurant_select.value"></dmx-serverconnect>
+<dmx-serverconnect id="scOrderList" url="/api/Orders/Orders" dmx-param:offset="qm.data.offset" dmx-param:limit="25" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:search_value="formSearch.SearchValue.value.titlecase()" dmx-param:market_id="market_select.value" dmx-param:cat_type_id="cattype_select.value" dmx-param:restaurant_id="restaurant_select.value"></dmx-serverconnect>
 <dmx-data-view id="dvProductList" dmx-bind:data="scProductList.data.Products"></dmx-data-view>
 <dmx-data-detail id="ddProductList" dmx-bind:data="dvProductList.data" key="id"></dmx-data-detail>
 <div class="breadcome-area">
@@ -41,12 +41,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                            <div class="breadcomb-report">
-                                <select class="form-control pro-edt-select form-control-primary" type="text" id="restaurant_select" dmx-bind:options="scRestaurants.data.MarketRestaurents" optionvalue="id" optiontext="shop_name_en" dmx-bind:value="1">
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -60,9 +54,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap">
                     <h4>All Order List</h4>
-                    <div class="add-product">
-                        <a href="#" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddProductList.select(0)">Add New Product</a>
-                    </div>
+                    <!-- <div class="add-product">
+                        <a href="#" data-toggle="modal" data-target="#modalAddEdit" dmx-on:click="ddProductList.select(0)">Edit Ordr</a>
+                    </div> -->
                     <div class="breadcome-heading">
                         <form role="search" class="" id="formSearch">
                             <input type="text" placeholder="Search..." class="form-control" id="SearchValue">
@@ -70,6 +64,86 @@
                         </form>
                     </div>
                     <div class="table-responsive">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Order</th>
+                                    <th>User</th>
+                                    <th>Total amt</th>
+                                    <th>Discount</th>
+                                    <th>Ex charge amt</th>
+                                    <th>Ex comm amt</th>
+                                    <th>Delevery amt</th>
+                                    <th>User name</th>
+                                    <th>Address</th>
+                                    <th>Mobile</th>
+                                    <th>Whatsapp</th>
+                                    <th>Pin</th>
+                                    <th>Ps</th>
+                                    <th>Dist</th>
+                                    <th>State</th>
+                                    <th>Country</th>
+                                    <th>Wallet bal</th>
+                                    <th>Blank1</th>
+                                    <th>Blank2</th>
+                                    <th>Blank3</th>
+                                    <th>Created by</th>
+                                    <th>Created on</th>
+                                    <th>Updated on</th>
+                                    <th>Deleted on</th>
+                                    <th>Status</th>
+                                    <th>Payment status</th>
+                                    <th>Order assigned to</th>
+                                    <th>Applied promo</th>
+                                    <th>Wallet cashback amt</th>
+                                    <th>Wallet deduct amt</th>
+                                    <th>Wallet closing amt</th>
+                                    <th>Rest</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scOrderList.data.query.data" id="tableRepeat1">
+                                <tr>
+                                    <td dmx-text="id"></td>
+                                    <td dmx-text="order_id"></td>
+                                    <td dmx-text="user_id"></td>
+                                    <td dmx-text="total_amt"></td>
+                                    <td dmx-text="discount"></td>
+                                    <td dmx-text="ex_charge_amt"></td>
+                                    <td dmx-text="ex_comm_amt"></td>
+                                    <td dmx-text="delevery_amt"></td>
+                                    <td dmx-text="user_name"></td>
+                                    <td dmx-text="address"></td>
+                                    <td dmx-text="mobile"></td>
+                                    <td dmx-text="whatsapp"></td>
+                                    <td dmx-text="pin"></td>
+                                    <td dmx-text="ps"></td>
+                                    <td dmx-text="dist"></td>
+                                    <td dmx-text="state"></td>
+                                    <td dmx-text="country"></td>
+                                    <td dmx-text="wallet_bal"></td>
+                                    <td dmx-text="blank1"></td>
+                                    <td dmx-text="blank2"></td>
+                                    <td dmx-text="blank3"></td>
+                                    <td dmx-text="created_by"></td>
+                                    <td dmx-text="created_on"></td>
+                                    <td dmx-text="updated_on"></td>
+                                    <td dmx-text="deleted_on"></td>
+                                    <td dmx-text="status"></td>
+                                    <td dmx-text="payment_status"></td>
+                                    <td dmx-text="order_assigned_to"></td>
+                                    <td dmx-text="applied_promo_id"></td>
+                                    <td dmx-text="wallet_cashback_amt"></td>
+                                    <td dmx-text="wallet_deduct_amt"></td>
+                                    <td dmx-text="wallet_closing_amt"></td>
+                                    <td dmx-text="rest_id"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -116,7 +190,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                     <div class="text-light" dmx-show="content.scProductList.data.Products.length==0">
                         <p class="text-center fa-2x text-warning">
                             No record Found!
