@@ -1153,70 +1153,37 @@
                           "operation": "IS NULL"
                         },
                         {
-                          "condition": "OR",
-                          "rules": [
-                            {
-                              "id": "m_customer.fname",
-                              "field": "m_customer.fname",
+                          "id": "m_customer.blank2",
+                          "field": "m_customer.blank2",
+                          "type": "string",
+                          "operator": "equal",
+                          "value": "{{$_POST.EditRestaurantId}}",
+                          "data": {
+                            "table": "m_customer",
+                            "column": "blank2",
+                            "type": "text",
+                            "columnObj": {
                               "type": "string",
-                              "operator": "equal",
-                              "value": "{{$_POST.shop_name_en}}",
-                              "data": {
-                                "table": "m_customer",
-                                "column": "fname",
-                                "type": "text",
-                                "columnObj": {
-                                  "type": "string",
-                                  "maxLength": -5,
-                                  "primary": false,
-                                  "unique": false,
-                                  "nullable": true,
-                                  "name": "fname"
-                                }
-                              },
-                              "operation": "="
-                            },
-                            {
-                              "id": "m_customer.mobile",
-                              "field": "m_customer.mobile",
-                              "type": "string",
-                              "operator": "equal",
-                              "value": "{{$_POST.shop_mobile_no}}",
-                              "data": {
-                                "table": "m_customer",
-                                "column": "mobile",
-                                "type": "text",
-                                "columnObj": {
-                                  "type": "string",
-                                  "maxLength": -5,
-                                  "primary": false,
-                                  "unique": false,
-                                  "nullable": true,
-                                  "name": "mobile"
-                                }
-                              },
-                              "operation": "="
+                              "maxLength": -5,
+                              "primary": false,
+                              "unique": false,
+                              "nullable": true,
+                              "name": "blank2"
                             }
-                          ],
-                          "conditional": null
+                          },
+                          "operation": "="
                         }
                       ],
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "SELECT COUNT(id) AS CountUser\nFROM m_customer\nWHERE deleted_on IS NULL AND (fname = :P1 /* {{$_POST.shop_name_en}} */ OR mobile = :P2 /* {{$_POST.shop_mobile_no}} */)",
+                    "query": "SELECT COUNT(id) AS CountUser\nFROM m_customer\nWHERE deleted_on IS NULL AND blank2 = :P1 /* {{$_POST.EditRestaurantId}} */",
                     "params": [
                       {
                         "operator": "equal",
                         "type": "expression",
                         "name": ":P1",
-                        "value": "{{$_POST.shop_name_en}}"
-                      },
-                      {
-                        "operator": "equal",
-                        "type": "expression",
-                        "name": ":P2",
-                        "value": "{{$_POST.shop_mobile_no}}"
+                        "value": "{{$_POST.EditRestaurantId}}"
                       }
                     ]
                   }
@@ -1561,6 +1528,12 @@
                               },
                               {
                                 "table": "m_customer",
+                                "column": "blank2",
+                                "type": "text",
+                                "value": "{{$_POST.EditRestaurantId}}"
+                              },
+                              {
+                                "table": "m_customer",
                                 "column": "created_by",
                                 "type": "number",
                                 "value": "{{identity}}"
@@ -1580,7 +1553,7 @@
                             ],
                             "table": "m_customer",
                             "returning": "id",
-                            "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */, :P19 /* {{$_POST.address}} */)",
+                            "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, blank2, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{$_POST.EditRestaurantId}} */, :P18 /* {{identity}} */, :P19 /* {{NOW}} */, :P20 /* {{$_POST.address}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -1665,15 +1638,20 @@
                               {
                                 "name": ":P17",
                                 "type": "expression",
-                                "value": "{{identity}}"
+                                "value": "{{$_POST.EditRestaurantId}}"
                               },
                               {
                                 "name": ":P18",
                                 "type": "expression",
-                                "value": "{{NOW}}"
+                                "value": "{{identity}}"
                               },
                               {
                                 "name": ":P19",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P20",
                                 "type": "expression",
                                 "value": "{{$_POST.address}}"
                               }
@@ -4065,6 +4043,12 @@
                       },
                       {
                         "table": "m_customer",
+                        "column": "blank2",
+                        "type": "text",
+                        "value": "{{AddRestaurant.identity}}"
+                      },
+                      {
+                        "table": "m_customer",
                         "column": "created_by",
                         "type": "number",
                         "value": "{{identity}}"
@@ -4084,7 +4068,7 @@
                     ],
                     "table": "m_customer",
                     "returning": "id",
-                    "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{identity}} */, :P18 /* {{NOW}} */, :P19 /* {{$_POST.address}} */)",
+                    "query": "INSERT INTO m_customer\n(user_type_id, fname, lname, mobile, is_watsapp, watsapp_no, customer_email, user_password, salt, pin, gst_in, wallet_bal, ip_address, signup_via, status, blank1, blank2, created_by, created_on, address) VALUES (:P1 /* {{4}} */, :P2 /* {{$_POST.shop_name_en}} */, :P3 /* {{$_POST.owner_name}} */, :P4 /* {{$_POST.shop_mobile_no}} */, :P5 /* {{$_POST.is_watsapp}} */, :P6 /* {{(($_POST.is_watsapp=='Yes')?$_POST.shop_mobile_no:$_POST.whatsapp_no)}} */, :P7 /* {{$_POST.email_id}} */, :P8 /* {{password.sha256(NOW)}} */, :P9 /* {{NOW}} */, :P10 /* {{$_POST.pin}} */, :P11 /* {{$_POST.gst_in}} */, :P12 /* {{0}} */, :P13 /* {{$_SERVER.REMOTE_ADDR}} */, :P14 /* {{'Admin'}} */, :P15 /* {{1}} */, :P16 /* {{password}} */, :P17 /* {{AddRestaurant.identity}} */, :P18 /* {{identity}} */, :P19 /* {{NOW}} */, :P20 /* {{$_POST.address}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -4169,15 +4153,20 @@
                       {
                         "name": ":P17",
                         "type": "expression",
-                        "value": "{{identity}}"
+                        "value": "{{AddRestaurant.identity}}"
                       },
                       {
                         "name": ":P18",
                         "type": "expression",
-                        "value": "{{NOW}}"
+                        "value": "{{identity}}"
                       },
                       {
                         "name": ":P19",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P20",
                         "type": "expression",
                         "value": "{{$_POST.address}}"
                       }
@@ -4307,7 +4296,7 @@
                   "if": "{{$_POST.SlidingImage2}}",
                   "then": {
                     "steps": {
-                      "name": "uploadSlidingImage2_copy",
+                      "name": "uploadSlidingImage2",
                       "module": "upload",
                       "action": "upload",
                       "options": {
