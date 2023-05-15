@@ -3,258 +3,112 @@
     "$_GET": [
       {
         "type": "text",
-        "name": "offset"
+        "name": "search_items"
       },
       {
         "type": "text",
-        "name": "limit"
+        "name": "fromdate"
       },
       {
         "type": "text",
-        "name": "sort"
-      },
-      {
-        "type": "text",
-        "name": "dir"
+        "name": "todate"
       }
     ]
   },
   "exec": {
-    "steps": {
-      "name": "query",
-      "module": "dbconnector",
-      "action": "paged",
-      "options": {
-        "connection": "FoodApp",
-        "sql": {
-          "type": "SELECT",
-          "columns": [],
-          "table": {
-            "name": "r_order"
-          },
-          "primary": "id",
-          "joins": [],
-          "wheres": {
-            "condition": "AND",
-            "rules": [
-              {
-                "id": "r_order.deleted_on",
-                "field": "r_order.deleted_on",
-                "type": "datetime",
-                "operator": "is_null",
-                "value": null,
-                "data": {
-                  "table": "r_order",
-                  "column": "deleted_on",
-                  "type": "datetime",
-                  "columnObj": {
-                    "type": "timestamp",
-                    "primary": false,
-                    "unique": false,
-                    "nullable": true,
-                    "name": "deleted_on"
-                  }
-                },
-                "operation": "IS NULL"
-              }
-            ],
-            "conditional": null,
-            "valid": true
-          },
-          "query": "SELECT *\nFROM r_order\nWHERE deleted_on IS NULL",
-          "params": []
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
         }
       },
-      "output": true,
-      "meta": [
-        {
-          "name": "offset",
-          "type": "number"
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
         },
-        {
-          "name": "limit",
-          "type": "number"
-        },
-        {
-          "name": "total",
-          "type": "number"
-        },
-        {
-          "name": "page",
-          "type": "object",
-          "sub": [
-            {
-              "name": "offset",
-              "type": "object",
-              "sub": [
-                {
-                  "name": "first",
-                  "type": "number"
-                },
-                {
-                  "name": "prev",
-                  "type": "number"
-                },
-                {
-                  "name": "next",
-                  "type": "number"
-                },
-                {
-                  "name": "last",
-                  "type": "number"
+        "output": false,
+        "meta": []
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{!$_GET.search_items}}",
+          "then": {
+            "steps": {
+              "name": "GetOrders",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "FoodApp",
+                "sql": {
+                  "query": "select ro.id, ro.order_id, ro.user_id, ro.total_amt, ro.discount, ro.ex_charge_amt, ro.ex_comm_amt, ro.delevery_amt, ro.user_name, ro.address, \nro.mobile, ro.whatsapp, ro.pin, ro.ps, ro.dist, ro.state, ro.status, ro.payment_status, ro.created_on::text, ro.updated_on::text, ro.order_assigned_to, ro.applied_promo_id, \nro.wallet_cashback_amt, ro.wallet_deduct_amt, ro.wallet_closing_amt, ro.rest_id, mc.fname, mc.lname, mc.mobile as user_mobile, mc.wallet_bal,\nmr.shop_name_en, mr.shop_logo, mr.shop_mobile_no, mr.address as shop_address, \nmc_del.fname as delivery_fname, mc_del.lname as delivery_lname, mc_del.mobile as delivery_mobile, mc_del.watsapp_no as delivery_whatsapp, (select pc.promo_code from promo_code pc where pc.id = ro.applied_promo_id) as promo_code \nfrom r_order ro \nleft join m_customer mc on (mc.id = ro.user_id)\nleft join m_customer mc_del on (mc_del.id = ro.order_assigned_to)\nleft join m_restaurant mr on (mr.id = ro.rest_id) \nwhere ro.created_on between @fromdate and @todate order by ro.id desc;",
+                  "params": [
+                    {
+                      "name": "@fromdate",
+                      "value": "{{$_GET.fromdate+' 00:00:00'}}",
+                      "test": "2023-05-13 00:00:00"
+                    },
+                    {
+                      "name": "@todate",
+                      "value": "{{$_GET.todate+' 23:59:59'}}",
+                      "test": "2023-05-13 23:59:59"
+                    }
+                  ]
                 }
-              ]
-            },
-            {
-              "name": "current",
-              "type": "number"
-            },
-            {
-              "name": "total",
-              "type": "number"
+              },
+              "output": true,
+              "meta": [],
+              "outputType": "array"
             }
-          ]
+          },
+          "else": {
+            "steps": {
+              "name": "GetOrders",
+              "module": "dbupdater",
+              "action": "custom",
+              "options": {
+                "connection": "FoodApp",
+                "sql": {
+                  "query": "select ro.id, ro.order_id, ro.user_id, ro.total_amt, ro.discount, ro.ex_charge_amt, ro.ex_comm_amt, ro.delevery_amt, ro.user_name, ro.address, \nro.mobile, ro.whatsapp, ro.pin, ro.ps, ro.dist, ro.state, ro.status, ro.payment_status, ro.created_on::text, ro.updated_on::text, ro.order_assigned_to, ro.applied_promo_id, \nro.wallet_cashback_amt, ro.wallet_deduct_amt, ro.wallet_closing_amt, ro.rest_id, mc.fname, mc.lname, mc.mobile as user_mobile, mc.wallet_bal,\nmr.shop_name_en, mr.shop_logo, mr.shop_mobile_no, mr.address as shop_address, \nmc_del.fname as delivery_fname, mc_del.lname as delivery_lname, mc_del.mobile as delivery_mobile, mc_del.watsapp_no as delivery_whatsapp, (select pc.promo_code from promo_code pc where pc.id = ro.applied_promo_id) as promo_code \nfrom r_order ro \nleft join m_customer mc on (mc.id = ro.user_id)\nleft join m_customer mc_del on (mc_del.id = ro.order_assigned_to)\nleft join m_restaurant mr on (mr.id = ro.rest_id) \nwhere ro.created_on between @fromdate and @todate and (LOWER(mr.shop_name_en) LIKE @search or LOWER(mr.shop_mobile_no) LIKE @search or LOWER(mr.address) LIKE @search or LOWER(ro.order_id) LIKE @search or LOWER(mc_del.fname) LIKE @search or LOWER(mc_del.lname) LIKE @search or LOWER(mc_del.mobile) LIKE @search or LOWER(ro.payment_status) LIKE @search or LOWER(mc.fname) LIKE @search or LOWER(mc.lname) LIKE @search or LOWER(mc.fname) LIKE @search or LOWER(mc.mobile) LIKE @search) order by ro.id desc;",
+                  "params": [
+                    {
+                      "name": "@fromdate",
+                      "value": "{{$_GET.fromdate+' 00:00:00'}}",
+                      "test": "2023-05-13 00:00:00"
+                    },
+                    {
+                      "name": "@todate",
+                      "value": "{{$_GET.todate+' 23:59:59'}}",
+                      "test": "2023-05-13 23:59:59"
+                    },
+                    {
+                      "name": "@search",
+                      "value": "{{'%'+$_GET.search_items.lowercase()+'%'}}"
+                    }
+                  ]
+                }
+              },
+              "output": true,
+              "meta": [],
+              "outputType": "array"
+            }
+          }
         },
-        {
-          "name": "data",
-          "type": "array",
-          "sub": [
-            {
-              "type": "number",
-              "name": "id"
-            },
-            {
-              "type": "text",
-              "name": "order_id"
-            },
-            {
-              "type": "number",
-              "name": "user_id"
-            },
-            {
-              "type": "text",
-              "name": "total_amt"
-            },
-            {
-              "type": "text",
-              "name": "discount"
-            },
-            {
-              "type": "text",
-              "name": "ex_charge_amt"
-            },
-            {
-              "type": "text",
-              "name": "ex_comm_amt"
-            },
-            {
-              "type": "text",
-              "name": "delevery_amt"
-            },
-            {
-              "type": "text",
-              "name": "user_name"
-            },
-            {
-              "type": "text",
-              "name": "address"
-            },
-            {
-              "type": "text",
-              "name": "mobile"
-            },
-            {
-              "type": "text",
-              "name": "whatsapp"
-            },
-            {
-              "type": "text",
-              "name": "pin"
-            },
-            {
-              "type": "text",
-              "name": "ps"
-            },
-            {
-              "type": "text",
-              "name": "dist"
-            },
-            {
-              "type": "text",
-              "name": "state"
-            },
-            {
-              "type": "text",
-              "name": "country"
-            },
-            {
-              "type": "text",
-              "name": "wallet_bal"
-            },
-            {
-              "type": "text",
-              "name": "blank1"
-            },
-            {
-              "type": "text",
-              "name": "blank2"
-            },
-            {
-              "type": "text",
-              "name": "blank3"
-            },
-            {
-              "type": "number",
-              "name": "created_by"
-            },
-            {
-              "type": "datetime",
-              "name": "created_on"
-            },
-            {
-              "type": "datetime",
-              "name": "updated_on"
-            },
-            {
-              "type": "datetime",
-              "name": "deleted_on"
-            },
-            {
-              "type": "number",
-              "name": "status"
-            },
-            {
-              "type": "text",
-              "name": "payment_status"
-            },
-            {
-              "type": "number",
-              "name": "order_assigned_to"
-            },
-            {
-              "type": "number",
-              "name": "applied_promo_id"
-            },
-            {
-              "type": "text",
-              "name": "wallet_cashback_amt"
-            },
-            {
-              "type": "text",
-              "name": "wallet_deduct_amt"
-            },
-            {
-              "type": "text",
-              "name": "wallet_closing_amt"
-            },
-            {
-              "type": "number",
-              "name": "rest_id"
-            }
-          ]
-        }
-      ],
-      "outputType": "object"
-    }
+        "outputType": "boolean"
+      }
+    ]
   }
 }
