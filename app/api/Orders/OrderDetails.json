@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "order_id"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "output": false,
+        "meta": []
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "trycatch",
+        "options": {
+          "try": {
+            "steps": [
+              {
+                "name": "Status",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": 200
+                },
+                "meta": [],
+                "output": true,
+                "outputType": "text"
+              },
+              {
+                "name": "Details",
+                "module": "dbupdater",
+                "action": "custom",
+                "options": {
+                  "connection": "FoodApp",
+                  "sql": {
+                    "query": "select rod.id as ord_details_id, rod.prod_id as p_id, rod.price_id, rod.prod_qty, rod.each_unit_price, rod.each_net_amt, rpt.mrp, rod.purchase_price, rod.order_status, \nrod.created_on::text, rod.updated_on::text, rod.deleted_on::text, mp.prod_id, mp.prod_name_en as prod_name, (select mpm.mark_name from m_prod_mark mpm where mp.prod_mark_id = mpm.id) as prod_mark, \nmp.prod_img1, rpt.quantity as howmuch, rpt.q_unit \nfrom r_order_details rod \nleft join m_product mp on (mp.id = rod.prod_id)\nleft join r_price_table rpt on (rpt.id = rod.price_id)\nwhere rod.order_table_id = @order_id;",
+                    "params": [
+                      {
+                        "name": "@order_id",
+                        "value": "{{$_GET.order_id}}",
+                        "test": "34"
+                      }
+                    ]
+                  }
+                },
+                "output": true,
+                "meta": [],
+                "outputType": "array"
+              }
+            ]
+          },
+          "catch": {
+            "steps": [
+              {
+                "name": "Status",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": 400
+                },
+                "meta": [],
+                "output": true,
+                "outputType": "text"
+              },
+              {
+                "name": "Message",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "Suspicious Activity"
+                },
+                "meta": [],
+                "output": true,
+                "outputType": "text"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

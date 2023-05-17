@@ -1467,6 +1467,14 @@ dmx.config({
     "tableRepeat1": {
       "meta": [],
       "outputType": "array"
+    },
+    "ddOrderDetails": {
+      "meta": [],
+      "outputType": "array"
+    },
+    "RepeatOrderDetails": {
+      "meta": [],
+      "outputType": "array"
     }
   }
 });
