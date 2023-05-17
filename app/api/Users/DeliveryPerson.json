@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "security",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "output": false,
+        "meta": []
+      },
+      {
+        "name": "query",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "FoodApp",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "m_customer",
+                "column": "id",
+                "alias": "delivery_id"
+              },
+              {
+                "table": "m_customer",
+                "column": "fname"
+              },
+              {
+                "table": "m_customer",
+                "column": "lname"
+              }
+            ],
+            "table": {
+              "name": "m_customer"
+            },
+            "primary": "id",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "m_customer.user_type_id",
+                  "field": "m_customer.user_type_id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{5}}",
+                  "data": {
+                    "table": "m_customer",
+                    "column": "user_type_id",
+                    "type": "number",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "references": "id",
+                      "inTable": "m_user_type",
+                      "referenceType": "integer",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "NO ACTION",
+                      "name": "user_type_id"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "m_customer.status",
+                  "field": "m_customer.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{1}}",
+                  "data": {
+                    "table": "m_customer",
+                    "column": "status",
+                    "type": "number",
+                    "columnObj": {
+                      "type": "integer",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "status"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "m_customer.deleted_on",
+                  "field": "m_customer.deleted_on",
+                  "type": "datetime",
+                  "operator": "is_null",
+                  "value": null,
+                  "data": {
+                    "table": "m_customer",
+                    "column": "deleted_on",
+                    "type": "datetime",
+                    "columnObj": {
+                      "type": "timestamp",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "deleted_on"
+                    }
+                  },
+                  "operation": "IS NULL"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "SELECT id AS delivery_id, fname, lname\nFROM m_customer\nWHERE user_type_id = :P1 /* {{5}} */ AND status = :P2 /* {{1}} */ AND deleted_on IS NULL",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{5}}"
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{1}}"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "number",
+            "name": "delivery_id"
+          },
+          {
+            "type": "text",
+            "name": "fname"
+          },
+          {
+            "type": "text",
+            "name": "lname"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}

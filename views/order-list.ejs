@@ -1,8 +1,9 @@
-<!-- Wappler include head-page="layouts/main" is="dmx-app" id="orderlist" appConnect="local" components="{dmxDataTraversal:{}}" components="{dmxDataTraversal:{},dmxDatePicker:{},dmxStateManagement:{},dmxBootstrap5Modal:{},dmxFormatter:{}}" bootstrap5="cdn" jquery_slim_35="cdn" moment_2="cdn" -->
+<!-- Wappler include head-page="layouts/main" is="dmx-app" id="orderlist" appConnect="local" components="{dmxDataTraversal:{}}" components="{dmxDataTraversal:{},dmxDatePicker:{},dmxStateManagement:{},dmxBootstrap5Modal:{}}" bootstrap5="cdn" jquery_slim_35="cdn" moment_2="cdn" -->
 <meta name="ac:route" content="/order-list">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scMarketList" url="/api/Location/ActiveMarketList"></dmx-serverconnect>
 <dmx-serverconnect id="scCategoryType" url="/api/Category/ActiveCategoryType"></dmx-serverconnect>
+<dmx-serverconnect id="scDeliveryPerson" url="/api/Users/DeliveryPerson" noload></dmx-serverconnect>
 <dmx-serverconnect id="scOrderList" url="/api/Orders/Orders" dmx-param:search_value="formSearch.SearchValue.value.titlecase()" dmx-param:market_id="market_select.value" dmx-param:cat_type_id="cattype_select.value" dmx-param:fromdate="formDatePicker.daterange.start" dmx-param:todate="formDatePicker.daterange.end"></dmx-serverconnect>
 <dmx-data-detail id="ddOrderList" dmx-bind:data="scOrderList.data.GetOrders" key="id"></dmx-data-detail>
 <dmx-serverconnect id="scOrderDetails" url="/api/Orders/OrderDetails" noload></dmx-serverconnect>
@@ -152,153 +153,104 @@
                 <div class="modal-close-area modal-close-df" dmx-on:click="scformAddEditOrder.reset(true);ddOrderList.select(0)">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
-                <h4 class="modal-title">{{content.ddOrderList.data.id?'View Order':'Add A New Order'}}</h4>
+                <h4 class="modal-title">{{content.ddOrderList.data.id?'View Order':'Add A New Order'}} <span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="scOrderDetails.state.executing"></span>
+                </h4>
             </div>
-            <form id="scformAddEditOrder" is="dmx-serverconnect-form" method="post" action="/api/Product/ProductAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scProductList.load({market_id: market_select.value, cat_type_id: cattype_select.value, restaurant_id: restaurant_select.value});notifMain.success(scformAddEditOrder.data);scformAddEditOrder.reset(true);" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
-                <div class="modal-body gito-py-0">
-                    <div class="row mx-0">
-                        <div class="col-12">
-                            <div class="review-tab-pro-inner">
-                                <ul id="myTab3" class="tab-review-design">
-                                    <li class="active"><a href="#ProductDetails"><i class="icon nalika-eye" aria-hidden="true"></i>Order Details</a></li>
-                                    <!-- <li><a href="#EditOrder"><i class="icon nalika-edit" aria-hidden="true"></i>Edit Order</a></li> -->
-                                </ul>
-                                <div id="myTabContent" class="tab-content custom-product-edit">
-                                    <div class="product-tab-list tab-pane fade active in" id="ProductDetails">
-                                        <div class="row">
-                                            <div class="table-responsive">
-                                                <table class="table text-warning">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Sl. No.</th>
-                                                            <th scope="col">Image</th>
-                                                            <th scope="col">Prod. Name</th>
-                                                            <th scope="col">Prod. Mark</th>
-                                                            <th scope="col">No. of Order</th>
-                                                            <th scope="col">Unit Price</th>
-                                                            <th style="color: #fff;" scope="col">Total Price</th>
-                                                            <th scope="col">MRP</th>
-                                                            <th scope="col">Order Status</th>
-                                                            <th scope="col">Quantity</th>
-                                                            <th scope="col">Order Placed at</th>
-                                                            <th scope="col">Order Updated</th>
-                                                            <th scope="col">Deleted On</th>
-                                                            <th scope="col">Prod. Id</th>
-                                                            <th scope="col">Shop Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody is="dmx-repeat" dmx-generator="bs5table" id="RepeatOrderDetails" key="ord_details_id" dmx-bind:repeat="scOrderDetails.data.Details">
-                                                        <tr>
-                                                            <th scope="row">{{$index+1}}</th>
-                                                            <th><img src="" dmx-bind:src="prod_img1" loading="lazy"></th>
-                                                            <td dmx-text="prod_name"></td>
-                                                            <td dmx-text="prod_mark"></td>
-                                                            <td dmx-text="prod_qty"></td>
-                                                            <td dmx-text="each_unit_price"></td>
-                                                            <td style="color: #fff;" dmx-text="each_net_amt"></td>
-                                                            <td style="    text-decoration: line-through;" dmx-text="mrp"></td>
-                                                            <td class="text-center aligncenter" dmx-text="(order_status==0)?'UnConfirmed':(order_status==1)?'Confirmed':(order_status==2)?'Canceled':(order_status==3)?'Prepairing':(order_status==4)?'OFD':(order_status==5)?'Delivered':(order_status==6)?'Returned':''" dmx-style:color="(order_status==0)?'#000':(order_status==1)?'#000':(order_status==2)?'#ff0000':(order_status==3)?'#4d4dff':(order_status==4)?'#000066':(order_status==5)?'#1f7a1f':(order_status==6)?'#ff0000':'#fff'" style="font-weight: bold; background: #fff;"></td>
-                                                            <td dmx-text="howmuch+' '+q_unit"></td>
-                                                            <td dmx-text="created_on.formatDate('dd-MMM-yyyy hh:mm A')"></td>
-                                                            <td dmx-text="updated_on.formatDate('dd-MMM-yyyy hh:mm A')"></td>
-                                                            <td dmx-text="(deleted_on!=null)?deleted_on.formatDate('dd-MMM-yyyy hh:mm A'):''"></td>
-                                                            <td dmx-text="prod_id"></td>
-                                                            <td dmx-text="purchase_price"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+            <div class="modal-body gito-py-0">
+                <div class="row mx-0">
+                    <div class="col-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#ProductDetails"><i class="icon nalika-eye" aria-hidden="true"></i>Order Details</a></li>
+                                <li dmx-on:click="scDeliveryPerson.load({},true)"><a href="#EditOrder"><i class="icon nalika-edit" aria-hidden="true"></i>Edit Order</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="ProductDetails">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table text-warning">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Sl. No.</th>
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Prod. Name</th>
+                                                        <th scope="col">Prod. Mark</th>
+                                                        <th scope="col">No. of Order</th>
+                                                        <th scope="col">Unit Price</th>
+                                                        <th style="color: #fff;" scope="col">Total Price</th>
+                                                        <th scope="col">MRP</th>
+                                                        <th scope="col">Order Status</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Order Placed at</th>
+                                                        <th scope="col">Order Updated</th>
+                                                        <th scope="col">Deleted On</th>
+                                                        <th scope="col">Prod. Id</th>
+                                                        <th scope="col">Shop Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="dmx-repeat" dmx-generator="bs5table" id="RepeatOrderDetails" key="ord_details_id" dmx-bind:repeat="scOrderDetails.data.Details">
+                                                    <tr>
+                                                        <th scope="row">{{$index+1}}</th>
+                                                        <th><img src="" dmx-bind:src="prod_img1" loading="lazy"></th>
+                                                        <td dmx-text="prod_name"></td>
+                                                        <td dmx-text="prod_mark"></td>
+                                                        <td dmx-text="prod_qty"></td>
+                                                        <td dmx-text="each_unit_price"></td>
+                                                        <td style="color: #fff;" dmx-text="each_net_amt"></td>
+                                                        <td style="    text-decoration: line-through;" dmx-text="mrp"></td>
+                                                        <td class="text-center aligncenter" dmx-text="(order_status==0)?'UnConfirmed':(order_status==1)?'Confirmed':(order_status==2)?'Canceled':(order_status==3)?'Prepairing':(order_status==4)?'OFD':(order_status==5)?'Delivered':(order_status==6)?'Returned':''" dmx-style:color="(order_status==0)?'#000':(order_status==1)?'#000':(order_status==2)?'#ff0000':(order_status==3)?'#4d4dff':(order_status==4)?'#000066':(order_status==5)?'#1f7a1f':(order_status==6)?'#ff0000':'#fff'" style="font-weight: bold; background: #fff;"></td>
+                                                        <td dmx-text="howmuch+' '+q_unit"></td>
+                                                        <td dmx-text="created_on.formatDate('dd-MMM-yyyy hh:mm A')"></td>
+                                                        <td dmx-text="updated_on.formatDate('dd-MMM-yyyy hh:mm A')"></td>
+                                                        <td dmx-text="(deleted_on!=null)?deleted_on.formatDate('dd-MMM-yyyy hh:mm A'):''"></td>
+                                                        <td dmx-text="prod_id"></td>
+                                                        <td dmx-text="purchase_price"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <div class="product-tab-list tab-pane fade" id="EditOrder">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="review-content-section">
-                                                    <input type="hidden" name="EditProductId" id="EditProductId" dmx-bind:value="content.ddOrderList.data.id">
-                                                    <input type="hidden" name="MarketId" id="MarketId" dmx-bind:value="content.market_select.value">
-                                                    <label class="text-info">Restaurant/ Shop</label>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="EditOrder">
+                                    <form id="scformAddEditOrder" is="dmx-serverconnect-form" method="post" action="/api/Product/ProductAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scOrderList.load({fromdate: formDatePicker.daterange.start, todate: formDatePicker.daterange.end},true);notifMain.success(scformAddEditOrder.data);scformAddEditOrder.reset()" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
+                                        <input type="hidden" name="EditOrderId" id="EditOrderId" dmx-bind:value="content.ddOrderList.data.id">
+                                        <div class="review-content-section">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <label class="text-info">Select Delevery Person</label>
                                                     <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="rest_id" name="rest_id" dmx-bind:value="restaurant_select.value" dmx-bind:options="scRestaurants.data.MarketRestaurents" optiontext="shop_name_en" optionvalue="id" required="">
+                                                        <select class="form-control" id="delivery_person_id" name="delivery_person_id" dmx-bind:value="ddOrderList.data.order_assigned_to" dmx-bind:options="scDeliveryPerson.data.query" optiontext="fname+'  '+lname" optionvalue="delivery_id" required="">
                                                             <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <label class="text-info">Category Name</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="category_id" name="category_id" dmx-bind:value="content.ddOrderList.data.category_id" dmx-bind:options="scCategory.data.GetCategory" optiontext="en_name" optionvalue="id" required="">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <label class="text-info">Brand Name</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="brand_id" name="brand_id" dmx-bind:value="content.ddOrderList.data.brand_id" dmx-bind:options="scBrand.data.GetBrand" optiontext="brand_name" optionvalue="id" required="">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <label class="text-info">Product Mark</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="prod_mark_id" name="prod_mark_id" dmx-bind:value="content.ddOrderList.data.prod_mark_id" dmx-bind:options="scProdMark.data.GetProductMark" optiontext="mark_name" optionvalue="id" required="">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <label class="text-info">Product occurrance</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="prod_occurrance_id" name="prod_occurance_id" dmx-bind:value="ddOrderList.data.prod_occurance_id" dmx-bind:options="scProdoccurrance.data.GetProdOccurance" optiontext="name_en" optionvalue="id" required="">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <label class="text-info">Status</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
-                                                        <select class="form-control" id="status" name="status" dmx-bind:value="content.ddOrderList.data.status">
-                                                            <option value="1">Active</option>
-                                                            <option value="0">InActive</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="review-content-section">
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-home" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="prod_name_en" required="" dmx-bind:value="content.ddOrderList.data.prod_name_en" placeholder="Product Name (English)" id="prod_name_en">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <label class="text-info">Order Status</label>
+                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-flag" aria-hidden="true"></i></span>
+                                                        <select class="form-control" id="order_status" name="order_status" dmx-bind:value="ddOrderList.data.status" required="">
+                                                            <option value="0">UnConfirmed</option>
+                                                            <option value="1">Confirmed</option>
+                                                            <option value="2">Cancelled</option>
+                                                            <option value="3">Preparing</option>
+                                                            <option value="4">Out For Delivery (OFD)</option>
+                                                            <option value="5">Delivered</option>
+                                                            <option value="6">Returned</option>
+                                                        </select>
                                                     </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-home" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" placeholder="Product Name (Bengali)" name="prod_name_bn" required="" dmx-bind:value="content.ddOrderList.data.prod_name_bn">
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-home" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" placeholder="Product Name (Hindi)" name="prod_name_hin" required="" dmx-bind:value="content.ddOrderList.data.prod_name_hin">
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-forms" aria-hidden="true"></i></span>
-                                                        <textarea type="text" class="form-control" placeholder="Product Description (En)" name="prod_desc_en" dmx-bind:value="content.ddOrderList.data.prod_desc_en"></textarea>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-forms" aria-hidden="true"></i></span>
-                                                        <textarea type="text" class="form-control" placeholder="Product Description (Bn)" name="prod_desc_bn" dmx-bind:value="content.ddOrderList.data.prod_desc_bn"></textarea>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-forms" aria-hidden="true"></i></span>
-                                                        <textarea type="text" class="form-control" placeholder="Product Description (Hin)" name="prod_desc_hin" dmx-bind:value="content.ddOrderList.data.prod_desc_hin"></textarea>
-                                                    </div>
-                                                    <label class="text-info">Remarks</label>
-                                                    <div class="input-group mg-b-pro-edt"><span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
-                                                        <textarea type="text" class="form-control" name="remarks" id="remarks" placeholder="Enter Any remarks" dmx-bind:value="content.ddOrderList.data.remarks"></textarea>
-                                                    </div>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </div><button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">{{content.ddOrderList.data.id?'Update':'Submit'}}<span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" dmx-bind:disabled="state.executing">{{content.ddUserList.data.id?'Update':'Submit'}}<span class="spinner-border spinner-border-sm text-success" role="status" dmx-show="state.executing"></span></button>
-                    <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEditOrder.reset(true);ddOrderList.select(0)">Close</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-warning" dmx-on:click="scformAddEditOrder.reset(true);ddOrderList.select(0)">Close</button>
+            </div>
         </div>
     </div>
 </div>
