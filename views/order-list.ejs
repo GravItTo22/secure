@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="product-tab-list tab-pane fade" id="EditOrder">
-                                    <form id="scformAddEditOrder" is="dmx-serverconnect-form" method="post" action="/api/Product/ProductAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scOrderList.load({fromdate: formDatePicker.daterange.start, todate: formDatePicker.daterange.end},true);notifMain.success(scformAddEditOrder.data);scformAddEditOrder.reset()" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
+                                    <form id="scformAddEditOrder" is="dmx-serverconnect-form" method="post" action="/api/Orders/UpOrderDelivery" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scOrderList.load({fromdate: formDatePicker.daterange.start, todate: formDatePicker.daterange.end},true);notifMain.success(scformAddEditOrder.data);scformAddEditOrder.reset()" dmx-on:forbidden="notifMain.warning(lastError.response)" dmx-on:error="notifMain.warning(lastError.response)" dmx-on:unauthorized="notifMain.warning(lastError.response)" dmx-on:invalid="notifMain.warning(lastError.response)">
                                         <input type="hidden" name="EditOrderId" id="EditOrderId" dmx-bind:value="content.ddOrderList.data.id">
                                         <div class="review-content-section">
                                             <div class="row">
