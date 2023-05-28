@@ -3422,6 +3422,29 @@
           "else": {
             "steps": [
               {
+                "name": "validate",
+                "module": "validator",
+                "action": "validate",
+                "options": {
+                  "data": [
+                    {
+                      "name": "validate_1",
+                      "value": "{{$_POST.shop_mobile_no}}",
+                      "rules": {
+                        "db:notexists": {
+                          "param": {
+                            "connection": "FoodApp",
+                            "table": "m_customer",
+                            "column": "mobile"
+                          },
+                          "message": "Mobile No. already exists in database."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "GetRest",
                 "module": "dbconnector",
                 "action": "single",
